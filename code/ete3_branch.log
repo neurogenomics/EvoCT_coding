@@ -1,10 +1,10 @@
-file : /rds/general/user/cm1118/projects/cellevolution/live/genes/ABCD3/ABCD3-clean.fasta
+file : /rds/general/user/cm1118/projects/cellevolution/live/genes/ABHD5/ABHD5-clean.fasta
 30	sequences with genetic code	The_Standard_Code
-The file '/rds/general/user/cm1118/projects/cellevolution/live/genes/ABCD3/ABCD3_nostop.fasta' was created.
-The file '/rds/general/user/cm1118/projects/cellevolution/live/genes/ABCD3/ABCD3-clean_AA.fasta' was created.
+The file '/rds/general/user/cm1118/projects/cellevolution/live/genes/ABHD5/ABHD5_nostop.fasta' was created.
+The file '/rds/general/user/cm1118/projects/cellevolution/live/genes/ABHD5/ABHD5-clean_AA.fasta' was created.
 PROGRAM HAS FINISHED SUCCESSFULLY
 Species tree is not empty
-****** Running branch model for ABCD3 ******
+****** Running branch model for ABHD5 ******
 Traceback (most recent call last):
   File "/rds/general/user/cm1118/home/anaconda3/envs/ete3_env/bin/ete3", line 11, in <module>
     load_entry_point('ete3==3.1.1', 'console_scripts', 'ete3')()
@@ -17,7 +17,7 @@ Traceback (most recent call last):
   File "/rds/general/user/cm1118/home/anaconda3/envs/ete3_env/lib/python3.6/site-packages/ete3-3.1.1-py3.6.egg/ete3/tools/ete_evol.py", line 562, in run_all_models
     'ERROR: output files already exists, use "--resume"'
 Exception: ERROR: output files already exists, use "--resume" option to skip computation or "--clear_all" to overwrite.
-Done with ABCD3
+Done with ABHD5
 
 ============================================
 
@@ -25,6 +25,6 @@ Done with ABCD3
 
                  Memory (GB)    NCPUs
  Requested  :       124            32
- Used       :         0 (peak)   0.11 (ave)
+ Used       :         0 (peak)   1.00 (ave)
 
 ============================================
