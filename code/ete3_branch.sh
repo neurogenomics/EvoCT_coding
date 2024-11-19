@@ -1,13 +1,8 @@
 #!/bin/bash
-#PBS -l walltime=72:00:00
-#PBS -l select=1:ncpus=32:mem=124gb
-#PBS -J 1-278
-#PBS -j oe
-#PBS -o ete3_branch.log
 
 # Load necessary modules and activate the environment
-module load anaconda3/personal
-source activate ete3_env
+#module load anaconda3/personal
+#source activate ete3_env
 
 # Define important environment variables
 export repo_dir=/rds/general/user/cm1118/projects/cellevolution/live/EvoCT_coding
