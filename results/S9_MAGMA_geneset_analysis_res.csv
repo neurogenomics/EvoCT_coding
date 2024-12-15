@@ -1,0 +1,121 @@
+VARIABLE,TYPE,NGENES,BETA,BETA_STD,SE,P,selection,branch,group,fdr
+Negative_selection_in_Great_...,SET,3431,-0.0096305,-0.0037558,0.0166,0.71909,Negative selection,Great Apes,ADHD,0.80824
+Negative_selection_in_Haplor...,SET,3958,-0.010751,-0.0044232,0.015659,0.75383,Negative selection,Haplorhini,ADHD,0.80824
+Negative_selection_in_Homo-P...,SET,2602,0.011253,0.0039267,0.018452,0.27098,Negative selection,Homo-Pan,ADHD,0.80824
+Negative_selection_in_Humans,SET,6065,0.0058269,0.0027414,0.013836,0.33683,Negative selection,Humans,ADHD,0.80824
+Negative_selection_in_Primat...,SET,5430,0.0075723,0.0034571,0.014061,0.2951,Negative selection,Primates,ADHD,0.80824
+Positive_selection_in_Great_...,SET,138,0.067149,0.0058031,0.074624,0.18411,Positive selection,Great Apes,ADHD,0.80824
+Positive_selection_in_Haplor...,SET,419,-0.011128,-0.0016627,0.042149,0.60411,Positive selection,Haplorhini,ADHD,0.80824
+Positive_selection_in_Homo-P...,SET,80,-0.067379,-0.0044406,0.098507,0.75301,Positive selection,Homo-Pan,ADHD,0.80824
+Positive_selection_in_Humans,SET,203,-0.052823,-0.0055269,0.060616,0.80824,Positive selection,Humans,ADHD,0.80824
+Positive_selection_in_Primat...,SET,563,-0.023005,-0.0039685,0.038114,0.72693,Positive selection,Primates,ADHD,0.80824
+Negative_selection_in_Great_...,SET,3505,0.0067359,0.0026185,0.015228,0.32912,Negative selection,Great Apes,ALS,0.392211111111111
+Negative_selection_in_Haplor...,SET,4036,0.0056043,0.0022971,0.014288,0.34744,Negative selection,Haplorhini,ALS,0.392211111111111
+Negative_selection_in_Homo-P...,SET,2673,0.012873,0.0044869,0.01696,0.22392,Negative selection,Homo-Pan,ALS,0.392211111111111
+Negative_selection_in_Humans,SET,6226,0.014294,0.0067191,0.012651,0.12928,Negative selection,Humans,ALS,0.392211111111111
+Negative_selection_in_Primat...,SET,5525,0.0048764,0.0022183,0.012926,0.35299,Negative selection,Primates,ALS,0.392211111111111
+Positive_selection_in_Great_...,SET,142,0.045297,0.0039125,0.06602,0.24633,Positive selection,Great Apes,ALS,0.392211111111111
+Positive_selection_in_Haplor...,SET,436,0.02983,0.0044792,0.038569,0.21965,Positive selection,Haplorhini,ALS,0.392211111111111
+Positive_selection_in_Homo-P...,SET,87,0.10988,0.0074395,0.086961,0.10321,Positive selection,Homo-Pan,ALS,0.392211111111111
+Positive_selection_in_Humans,SET,212,-0.016111,-0.0016972,0.056697,0.61186,Positive selection,Humans,ALS,0.61186
+Positive_selection_in_Primat...,SET,596,0.039934,0.0069806,0.034212,0.12156,Positive selection,Primates,ALS,0.392211111111111
+Negative_selection_in_Great_...,SET,3505,0.025648,0.0099909,0.016507,0.060131,Negative selection,Great Apes,AD,0.133122
+Negative_selection_in_Haplor...,SET,4024,0.011918,0.004889,0.015588,0.22228,Negative selection,Haplorhini,AD,0.370466666666667
+Negative_selection_in_Homo-P...,SET,2671,0.028071,0.0098024,0.018322,0.062752,Negative selection,Homo-Pan,AD,0.133122
+Negative_selection_in_Humans,SET,6217,-0.0052319,-0.0024617,0.013681,0.64893,Negative selection,Humans,AD,0.64995
+Negative_selection_in_Primat...,SET,5516,0.035695,0.016255,0.014006,0.0054136,Negative selection,Primates,AD,0.054136
+Positive_selection_in_Great_...,SET,141,0.10863,0.0093742,0.072322,0.066561,Positive selection,Great Apes,AD,0.133122
+Positive_selection_in_Haplor...,SET,437,0.018283,0.0027555,0.04201,0.33171,Positive selection,Haplorhini,AD,0.473871428571429
+Positive_selection_in_Homo-P...,SET,83,-0.017373,-0.0011521,0.095044,0.57252,Positive selection,Homo-Pan,AD,0.64995
+Positive_selection_in_Humans,SET,206,-0.023103,-0.0024057,0.059979,0.64995,Positive selection,Humans,AD,0.64995
+Positive_selection_in_Primat...,SET,593,0.057009,0.0099663,0.037066,0.062026,Positive selection,Primates,AD,0.133122
+Negative_selection_in_Great_...,SET,3405,-0.024954,-0.0095819,0.014911,0.95288,Negative selection,Great Apes,Macular degeneration,0.95592
+Negative_selection_in_Haplor...,SET,3912,0.021432,0.0086758,0.014071,0.063867,Negative selection,Haplorhini,Macular degeneration,0.472333333333333
+Negative_selection_in_Homo-P...,SET,2600,-0.028453,-0.009791,0.016685,0.95592,Negative selection,Homo-Pan,Macular degeneration,0.95592
+Negative_selection_in_Humans,SET,6025,0.0094841,0.004417,0.012491,0.22386,Negative selection,Humans,Macular degeneration,0.55965
+Negative_selection_in_Primat...,SET,5311,-0.0082598,-0.0037101,0.012725,0.74186,Negative selection,Primates,Macular degeneration,0.927325
+Positive_selection_in_Great_...,SET,119,0.077649,0.0061351,0.070431,0.13513,Positive selection,Great Apes,Macular degeneration,0.472333333333333
+Positive_selection_in_Haplor...,SET,405,0.0036336,0.00052559,0.038697,0.4626,Positive selection,Haplorhini,Macular degeneration,0.771
+Positive_selection_in_Homo-P...,SET,64,0.10277,0.0059635,0.095804,0.1417,Positive selection,Homo-Pan,Macular degeneration,0.472333333333333
+Positive_selection_in_Humans,SET,175,0.025043,0.0023959,0.06014,0.33856,Positive selection,Humans,Macular degeneration,0.67712
+Positive_selection_in_Primat...,SET,544,-0.015089,-0.0025201,0.034794,0.66774,Positive selection,Primates,Macular degeneration,0.927325
+Negative_selection_in_Great_...,SET,1420,-0.11376,-0.047747,0.036155,0.99917,Negative selection,Great Apes,MS,0.99917
+Negative_selection_in_Haplor...,SET,1653,-0.067333,-0.029741,0.033994,0.97616,Negative selection,Haplorhini,MS,0.99917
+Negative_selection_in_Homo-P...,SET,1094,-0.088274,-0.033604,0.039461,0.98734,Negative selection,Homo-Pan,MS,0.99917
+Negative_selection_in_Humans,SET,2450,-0.041425,-0.020241,0.030953,0.90958,Negative selection,Humans,MS,0.99917
+Negative_selection_in_Primat...,SET,2218,-0.073435,-0.035174,0.031309,0.99048,Negative selection,Primates,MS,0.99917
+Positive_selection_in_Great_...,SET,43,-0.02928,-0.0024256,0.19114,0.56087,Positive selection,Great Apes,MS,0.99917
+Positive_selection_in_Haplor...,SET,156,-0.081661,-0.012767,0.094426,0.80641,Positive selection,Haplorhini,MS,0.99917
+Positive_selection_in_Homo-P...,SET,27,-0.39746,-0.026126,0.20977,0.97091,Positive selection,Homo-Pan,MS,0.99917
+Positive_selection_in_Humans,SET,70,-0.16606,-0.017514,0.14346,0.87644,Positive selection,Humans,MS,0.99917
+Positive_selection_in_Primat...,SET,194,0.18842,0.032748,0.08845,0.016598,Positive selection,Primates,MS,0.16598
+Negative_selection_in_Great_...,SET,3500,-0.0063269,-0.0024642,0.015426,0.65915,Negative selection,Great Apes,ASD,0.8346
+Negative_selection_in_Haplor...,SET,4025,0.020079,0.0082409,0.014523,0.083401,Negative selection,Haplorhini,ASD,0.667066666666667
+Negative_selection_in_Homo-P...,SET,2667,-0.016608,-0.0057984,0.017077,0.8346,Negative selection,Homo-Pan,ASD,0.8346
+Negative_selection_in_Humans,SET,6208,0.00090962,0.00042795,0.012796,0.47166,Negative selection,Humans,ASD,0.7861
+Negative_selection_in_Primat...,SET,5519,0.012016,0.0054744,0.013024,0.17812,Negative selection,Primates,ASD,0.667066666666667
+Positive_selection_in_Great_...,SET,141,0.0082288,0.00071048,0.068317,0.45206,Positive selection,Great Apes,ASD,0.7861
+Positive_selection_in_Haplor...,SET,434,-0.025338,-0.0038079,0.03865,0.74395,Positive selection,Haplorhini,ASD,0.8346
+Positive_selection_in_Homo-P...,SET,86,-0.081141,-0.0054795,0.086108,0.82698,Positive selection,Homo-Pan,ASD,0.8346
+Positive_selection_in_Humans,SET,210,0.048837,0.0051364,0.058055,0.20012,Positive selection,Humans,ASD,0.667066666666667
+Positive_selection_in_Primat...,SET,586,0.02051,0.0035668,0.034722,0.27736,Positive selection,Primates,ASD,0.6934
+Negative_selection_in_Great_...,SET,3474,0.024946,0.0097136,0.016729,0.067961,Negative selection,Great Apes,MDD,0.339805
+Negative_selection_in_Haplor...,SET,4001,-0.0054211,-0.0022256,0.015748,0.63466,Negative selection,Haplorhini,MDD,0.826877777777778
+Negative_selection_in_Homo-P...,SET,2652,-0.012208,-0.0042643,0.0186,0.74419,Negative selection,Homo-Pan,MDD,0.826877777777778
+Negative_selection_in_Humans,SET,6170,0.010162,0.004782,0.013858,0.23169,Negative selection,Humans,MDD,0.7723
+Negative_selection_in_Primat...,SET,5495,0.023321,0.010633,0.014043,0.0484,Negative selection,Primates,MDD,0.339805
+Positive_selection_in_Great_...,SET,141,-0.017477,-0.0015142,0.073633,0.59381,Positive selection,Great Apes,MDD,0.826877777777778
+Positive_selection_in_Haplor...,SET,431,-0.083254,-0.012511,0.042665,0.97448,Positive selection,Haplorhini,MDD,0.97448
+Positive_selection_in_Homo-P...,SET,83,-0.04431,-0.00295,0.093372,0.68245,Positive selection,Homo-Pan,MDD,0.826877777777778
+Positive_selection_in_Humans,SET,208,-0.011702,-0.0012291,0.06218,0.57464,Positive selection,Humans,MDD,0.826877777777778
+Positive_selection_in_Primat...,SET,587,-0.01442,-0.0025181,0.037415,0.65003,Positive selection,Primates,MDD,0.826877777777778
+Negative_selection_in_Great_...,SET,3506,0.010489,0.0040835,0.015613,0.25086,Negative selection,Great Apes,PD,0.7688
+Negative_selection_in_Haplor...,SET,4029,0.037687,0.015458,0.014641,0.0050288,Negative selection,Haplorhini,PD,0.025144
+Negative_selection_in_Homo-P...,SET,2674,0.04515,0.015763,0.017411,0.0047574,Negative selection,Homo-Pan,PD,0.025144
+Negative_selection_in_Humans,SET,6225,9.0619e-05,4.2635e-05,0.012954,0.49721,Negative selection,Humans,PD,0.7688
+Negative_selection_in_Primat...,SET,5528,-0.0065903,-0.0030016,0.013146,0.69192,Negative selection,Primates,PD,0.7688
+Positive_selection_in_Great_...,SET,142,-0.023162,-0.0020042,0.067873,0.63354,Positive selection,Great Apes,PD,0.7688
+Positive_selection_in_Haplor...,SET,434,-0.087833,-0.013183,0.039808,0.98632,Positive selection,Haplorhini,PD,0.98632
+Positive_selection_in_Homo-P...,SET,85,0.012185,0.00081697,0.089221,0.44569,Positive selection,Homo-Pan,PD,0.7688
+Positive_selection_in_Humans,SET,210,-0.0037067,-0.00038934,0.055803,0.52648,Positive selection,Humans,PD,0.7688
+Positive_selection_in_Primat...,SET,593,-0.011621,-0.0020299,0.035444,0.62849,Positive selection,Primates,PD,0.7688
+Negative_selection_in_Great_...,SET,3273,-0.012265,-0.0048299,0.016463,0.77186,Negative selection,Great Apes,Focal epilepsy,0.921088888888889
+Negative_selection_in_Haplor...,SET,3764,0.018789,0.0077917,0.01559,0.11408,Negative selection,Haplorhini,Focal epilepsy,0.380266666666667
+Negative_selection_in_Homo-P...,SET,2477,-0.02987,-0.010524,0.018463,0.94714,Negative selection,Homo-Pan,Focal epilepsy,0.94714
+Negative_selection_in_Humans,SET,5712,-0.00054791,-0.00025859,0.013689,0.51596,Negative selection,Humans,Focal epilepsy,0.921088888888889
+Negative_selection_in_Primat...,SET,5137,0.023658,0.010854,0.013959,0.045064,Negative selection,Primates,Focal epilepsy,0.22532
+Positive_selection_in_Great_...,SET,125,-0.062423,-0.0053241,0.075942,0.79445,Positive selection,Great Apes,Focal epilepsy,0.921088888888889
+Positive_selection_in_Haplor...,SET,377,-0.008708,-0.0012802,0.043134,0.57999,Positive selection,Haplorhini,Focal epilepsy,0.921088888888889
+Positive_selection_in_Homo-P...,SET,69,0.29214,0.018543,0.10666,0.0030846,Positive selection,Homo-Pan,Focal epilepsy,0.030846
+Positive_selection_in_Humans,SET,179,0.014315,0.0014587,0.064948,0.41278,Positive selection,Humans,Focal epilepsy,0.921088888888889
+Positive_selection_in_Primat...,SET,518,-0.036399,-0.0062461,0.038307,0.82898,Positive selection,Primates,Focal epilepsy,0.921088888888889
+Negative_selection_in_Great_...,SET,3489,0.019316,0.0075453,0.01553,0.1068,Negative selection,Great Apes,Anxiety,0.27596
+Negative_selection_in_Haplor...,SET,4004,0.0014054,0.00057796,0.014847,0.46229,Negative selection,Haplorhini,Anxiety,0.660414285714286
+Negative_selection_in_Homo-P...,SET,2660,-0.0079077,-0.0027702,0.017306,0.67614,Negative selection,Homo-Pan,Anxiety,0.845175
+Negative_selection_in_Humans,SET,6180,0.015962,0.0075216,0.012992,0.10961,Negative selection,Humans,Anxiety,0.27596
+Negative_selection_in_Primat...,SET,5469,0.015041,0.0068558,0.013305,0.12915,Negative selection,Primates,Anxiety,0.27596
+Positive_selection_in_Great_...,SET,141,-0.12809,-0.011119,0.069782,0.96679,Positive selection,Great Apes,Anxiety,0.96679
+Positive_selection_in_Haplor...,SET,428,0.043784,0.0065699,0.040188,0.13798,Positive selection,Haplorhini,Anxiety,0.27596
+Positive_selection_in_Homo-P...,SET,80,0.020447,0.0013392,0.098527,0.4178,Positive selection,Homo-Pan,Anxiety,0.660414285714286
+Positive_selection_in_Humans,SET,203,0.16452,0.017107,0.058132,0.0023293,Positive selection,Humans,Anxiety,0.023293
+Positive_selection_in_Primat...,SET,580,-0.030749,-0.0053485,0.035209,0.80875,Positive selection,Primates,Anxiety,0.898611111111111
+Negative_selection_in_Great_...,SET,3431,0.024228,0.0094771,0.019916,0.1119,Negative selection,Great Apes,Schizophrenia,0.27975
+Negative_selection_in_Haplor...,SET,3954,0.045737,0.018862,0.018873,0.007693,Negative selection,Haplorhini,Schizophrenia,0.07693
+Negative_selection_in_Homo-P...,SET,2616,0.023375,0.0082014,0.021979,0.14378,Negative selection,Homo-Pan,Schizophrenia,0.28756
+Negative_selection_in_Humans,SET,6066,0.023618,0.011134,0.016636,0.07786,Negative selection,Humans,Schizophrenia,0.27975
+Negative_selection_in_Primat...,SET,5407,0.020967,0.0095822,0.016841,0.10658,Negative selection,Primates,Schizophrenia,0.27975
+Positive_selection_in_Great_...,SET,136,-0.108,-0.0093018,0.088706,0.88828,Positive selection,Great Apes,Schizophrenia,0.99548
+Positive_selection_in_Haplor...,SET,417,-0.12792,-0.019142,0.050756,0.99413,Positive selection,Haplorhini,Schizophrenia,0.99548
+Positive_selection_in_Homo-P...,SET,78,-0.0014099,-9.2115e-05,0.122,0.50461,Positive selection,Homo-Pan,Schizophrenia,0.841016666666667
+Positive_selection_in_Humans,SET,198,-0.19512,-0.020242,0.074734,0.99548,Positive selection,Humans,Schizophrenia,0.99548
+Positive_selection_in_Primat...,SET,559,-0.016661,-0.002875,0.045741,0.64216,Positive selection,Primates,Schizophrenia,0.917371428571429
+Negative_selection_in_Great_...,SET,3505,0.0087051,0.0033928,0.017097,0.30532,Negative selection,Great Apes,Bipolar disorder,0.508866666666667
+Negative_selection_in_Haplor...,SET,4026,0.040925,0.016801,0.016181,0.005721,Negative selection,Haplorhini,Bipolar disorder,0.028605
+Negative_selection_in_Homo-P...,SET,2668,0.01191,0.0041596,0.019219,0.26773,Negative selection,Homo-Pan,Bipolar disorder,0.508866666666667
+Negative_selection_in_Humans,SET,6218,0.015334,0.0072181,0.01422,0.14045,Negative selection,Humans,Bipolar disorder,0.351125
+Negative_selection_in_Primat...,SET,5518,0.037272,0.016982,0.01453,0.0051599,Negative selection,Primates,Bipolar disorder,0.028605
+Positive_selection_in_Great_...,SET,141,-0.11667,-0.010076,0.076653,0.936,Positive selection,Great Apes,Bipolar disorder,0.936
+Positive_selection_in_Haplor...,SET,432,0.047111,0.0070656,0.042856,0.13582,Positive selection,Haplorhini,Bipolar disorder,0.351125
+Positive_selection_in_Homo-P...,SET,83,0.0040411,0.00026817,0.099823,0.48385,Positive selection,Homo-Pan,Bipolar disorder,0.691214285714286
+Positive_selection_in_Humans,SET,207,-0.014223,-0.0014856,0.064225,0.58763,Positive selection,Humans,Bipolar disorder,0.7345375
+Positive_selection_in_Primat...,SET,588,-0.051246,-0.0089284,0.038663,0.90748,Positive selection,Primates,Bipolar disorder,0.936

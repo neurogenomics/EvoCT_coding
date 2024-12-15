@@ -1,0 +1,621 @@
+celltype,p,coefs,ctd_level,branch
+Adult_Antigen_presenting_cell_(RPS_high),0.0268,-0.000622785866285064,3,Human
+Adult_Astrocyte,1e-04,0.00503082468850072,3,Human
+Adult_AT2_cell,0.8782,-8.45118768552482e-05,3,Human
+Adult_B_cell,1e-04,-0.001628230827007,3,Human
+Adult_B_cell_(Plasmocyte),1e-04,-0.00502347313287413,3,Human
+Adult_Basal_cell,0.7799,-0.000190688874782406,3,Human
+Adult_CB_CD34+,0.046,-0.0008123409936812,3,Human
+Adult_Chondrocyte,0.7952,-0.000118489772271302,3,Human
+Adult_Dendritic_cell,1e-04,-0.00145118550728456,3,Human
+Adult_Endothelial_cell,0.0256,0.000783145683153374,3,Human
+Adult_Endothelial_cell_(APC),0.0025,0.00094926914717255,3,Human
+Adult_Endothelial_cell_(endothelial_to_mesenchymal_transition),1e-04,0.00173946179367271,3,Human
+Adult_Enterocyte,3e-04,-0.00220626583060342,3,Human
+Adult_Enterocyte_progenitor,0.0295,-0.000834408584236616,3,Human
+Adult_Epithelial_cell,0.9426,-4.25446692247659e-05,3,Human
+Adult_Epithelial_cell_(intermediated),0.7453,0.000137853631509837,3,Human
+Adult_Erythroid_cell,0.1625,-0.00045855814649206,3,Human
+Adult_Erythroid_progenitor_cell_(RP_high),0.2872,-0.000233209155423712,3,Human
+Adult_Fasciculata_cell,0.2769,-0.00063528084473413,3,Human
+Adult_Fetal_acinar_cell,0.0028,0.00183593544171815,3,Human
+Adult_Fetal_chondrocyte,0.5952,0.000269409323145434,3,Human
+Adult_Fetal_endocrine_cell,0.4674,0.0004903044649152,3,Human
+Adult_Fetal_enterocyte,0.2826,-0.000571100529971349,3,Human
+Adult_Fetal_epithelial_progenitor,8e-04,-0.00300645186785258,3,Human
+Adult_Fetal_fibroblast,0.0011,0.00137249378419628,3,Human
+Adult_Fetal_mesenchymal_progenitor,0.0037,0.001297332690452,3,Human
+Adult_Fetal_neuron,0.0083,0.00218796253824879,3,Human
+Adult_Fetal_Neuron,0.5868,0.000325378006022195,3,Human
+Adult_Fetal_skeletal_muscle_cell,0.0223,0.00122103555398449,3,Human
+Adult_Fetal_stromal_cell,3e-04,0.0015741630487118,3,Human
+Adult_Fibroblast,0.0221,0.000677247534696718,3,Human
+Adult_Gastric_chief_cell,0.5958,-0.000228205255928795,3,Human
+Adult_Gastric_endocrine_cell,0.0074,-0.00163443697286567,3,Human
+Adult_Goblet_cell,0.7874,0.000146353368236946,3,Human
+Adult_Hepatocyte_Endodermal_cell,0.7538,0.00026814385129951,3,Human
+Adult_hESC,0.5935,0.000282496129587913,3,Human
+Adult_Intercalated_cell,0.7266,-0.000166099323127867,3,Human
+Adult_Intermediated_cell,0.6993,-0.000201836797590636,3,Human
+Adult_Kidney_intercalated_cell,0.0457,0.00123872014775078,3,Human
+Adult_Loop_of_Henle,0.7399,0.000138624697352901,3,Human
+Adult_M2_Macrophage,0.3118,-0.000346037608033368,3,Human
+Adult_Macrophage,8e-04,-0.00109917975167364,3,Human
+Adult_Mast_cell,0.6645,0.000166677525719084,3,Human
+Adult_Mesothelial_cell,0.1184,0.000781384258451529,3,Human
+Adult_Monocyte,3e-04,-0.00100266248891444,3,Human
+Adult_Myeloid_cell,0.3744,-0.000432915831887453,3,Human
+Adult_Neutrophil,0.0068,-0.00111291601053802,3,Human
+Adult_Neutrophil_(RPS_high),0.0168,-0.000696193767083974,3,Human
+Adult_Oligodendrocyte,1e-04,0.00507377552920104,3,Human
+Adult_Pancreas_exocrine_cell,0.2016,0.000812192408705479,3,Human
+Adult_Primordial_germ_cell,0.1775,-0.000649559188992648,3,Human
+Adult_Proliferating_T_cell,0.4632,-0.000333684100427451,3,Human
+Adult_Proximal_tubule_progenitor,0.8358,-0.000155959877853896,3,Human
+Adult_Sinusoidal_endothelial_cell,0.1189,-0.000968866973853127,3,Human
+Adult_Smooth_muscle_cell,0.0184,0.00113902794927274,3,Human
+Adult_Stratified_epithelial_cell,0.0095,-0.00172407081578672,3,Human
+Adult_Stromal_cell,0.5796,0.000145780143074087,3,Human
+Adult_T_cell,1e-04,-0.00310812012726781,3,Human
+Adult_Thyroid_follicular_cell,0.0995,-0.00090069935384749,3,Human
+Adult_Ureteric_bud_cell,0.8555,8.52924228610454e-05,3,Human
+Adult_Ventricle_cardiomyocyte,0.2871,0.000782640387300541,3,Human
+Fetus_Adrenal_gland_inflammatory_cell,0.239,-0.000587989863665409,3,Human
+Fetus_Antigen_presenting_cell_(RPS_high),3e-04,-0.000788032652485684,3,Human
+Fetus_Astrocyte,0.028,0.00181685108903491,3,Human
+Fetus_AT2_cell,0.2965,0.000663206613592021,3,Human
+Fetus_B_cell,0.0026,-0.000914575548701234,3,Human
+Fetus_B_cell_(Plasmocyte),0.133,-0.000583729979261792,3,Human
+Fetus_Basal_cell,0.2803,0.000546847309537042,3,Human
+Fetus_CB_CD34+,0.0052,-0.000780013440621147,3,Human
+Fetus_Dendritic_cell,1e-04,-0.00106680246496621,3,Human
+Fetus_Endothelial_cell,1e-04,0.00129281695616165,3,Human
+Fetus_Endothelial_cell_(APC),0.0815,0.000640529883538916,3,Human
+Fetus_Endothelial_cell_(endothelial_to_mesenchymal_transition),0.0637,0.000862915831523072,3,Human
+Fetus_Enterocyte,0.5808,-0.000262191941680319,3,Human
+Fetus_Enterocyte_progenitor,0.8492,-8.96623163383759e-05,3,Human
+Fetus_Epithelial_cell,0.1243,-0.0010786192694803,3,Human
+Fetus_Epithelial_cell_(intermediated),0.0765,-0.000802459982619771,3,Human
+Fetus_Erythroid_cell,0.0612,-0.000577938547914172,3,Human
+Fetus_Erythroid_progenitor_cell_(RP_high),0.0073,-0.000487578771108969,3,Human
+Fetus_Fasciculata_cell,0.8446,8.27111770800812e-05,3,Human
+Fetus_Fetal_acinar_cell,1e-04,0.00144751854301248,3,Human
+Fetus_Fetal_chondrocyte,0.8982,5.39544473126843e-05,3,Human
+Fetus_Fetal_endocrine_cell,0.0177,0.00151707053360998,3,Human
+Fetus_Fetal_enterocyte,0.442,-0.000126098696384322,3,Human
+Fetus_Fetal_epithelial_progenitor,0.1511,0.000447811372092924,3,Human
+Fetus_Fetal_fibroblast,0.0066,0.00102584462093435,3,Human
+Fetus_Fetal_mesenchymal_progenitor,0.0028,0.000831997954561898,3,Human
+Fetus_Fetal_neuron,1e-04,0.00367062387257921,3,Human
+Fetus_Fetal_Neuron,1e-04,0.00211946395898236,3,Human
+Fetus_Fetal_skeletal_muscle_cell,0.7141,0.000180111190314358,3,Human
+Fetus_Fetal_stromal_cell,0.0048,0.000795312284780253,3,Human
+Fetus_Fibroblast,0.0444,0.000821030573951763,3,Human
+Fetus_Gastric_endocrine_cell,0.273,-0.000620137776216204,3,Human
+Fetus_Goblet_cell,0.5513,0.000205080495106153,3,Human
+Fetus_Hepatocyte_Endodermal_cell,0.0356,-0.000917023153120078,3,Human
+Fetus_hESC,0.7207,-0.000218524208719487,3,Human
+Fetus_Immature_sertoli_cell_(Pre_Sertoli_cell),0.0096,0.00186300141568906,3,Human
+Fetus_Intercalated_cell,0.8745,-7.35637768319312e-05,3,Human
+Fetus_Intermediated_cell,0.6101,0.000179285812126934,3,Human
+Fetus_Kidney_intercalated_cell,0.6876,-0.000149292991690692,3,Human
+Fetus_Loop_of_Henle,0.3703,-0.000480289946842051,3,Human
+Fetus_M2_Macrophage,0.3425,-0.000339710919314056,3,Human
+Fetus_Macrophage,0.5203,-0.000161902758771081,3,Human
+Fetus_Mast_cell,0.1072,0.000706061892078094,3,Human
+Fetus_Monocyte,1e-04,-0.00084414020312028,3,Human
+Fetus_Myeloid_cell,0.8241,-9.23107204511812e-05,3,Human
+Fetus_Neutrophil,5e-04,-0.00106117507172714,3,Human
+Fetus_Neutrophil_(RPS_high),0.0033,-0.000629665194793411,3,Human
+Fetus_Pancreas_exocrine_cell,0.2776,-0.000603313231452229,3,Human
+Fetus_Primordial_germ_cell,2e-04,-0.00374981497898274,3,Human
+Fetus_Proliferating_T_cell,1e-04,-0.00220897296554267,3,Human
+Fetus_Proximal_tubule_progenitor,0.0249,0.00119401550386648,3,Human
+Fetus_Sinusoidal_endothelial_cell,0.847,-0.000149700851621325,3,Human
+Fetus_Smooth_muscle_cell,6e-04,0.0009887128582949,3,Human
+Fetus_Stratified_epithelial_cell,0.0325,-0.0012251631617024,3,Human
+Fetus_Stromal_cell,0.0014,0.00104064752125785,3,Human
+Fetus_T_cell,1e-04,-0.00146229084009478,3,Human
+Fetus_Ureteric_bud_cell,0.2867,-0.000310341086019428,3,Human
+Fetus_Ventricle_cardiomyocyte,0.5657,-0.000391914150192775,3,Human
+HESC_Fetal_epithelial_progenitor,0.3629,0.000404634728162609,3,Human
+HESC_Fetal_neuron,0.7305,0.000190015624392114,3,Human
+HESC_hESC,0.5169,0.000253914897475863,3,Human
+HESC_Primordial_germ_cell,0.7214,-0.00015234663649356,3,Human
+HESC_Proliferating_T_cell,0.84,-0.000126651291947613,3,Human
+Adult_Antigen_presenting_cell_(RPS_high),0.0496,-0.000766247929745791,3,Homo-Pan
+Adult_Astrocyte,0.2061,0.00140980378181003,3,Homo-Pan
+Adult_AT2_cell,0.1293,0.0011780658827703,3,Homo-Pan
+Adult_B_cell,0.0088,-0.00132325535981575,3,Homo-Pan
+Adult_B_cell_(Plasmocyte),7e-04,-0.00489354154398387,3,Homo-Pan
+Adult_Basal_cell,0.3426,-0.000876089712955241,3,Homo-Pan
+Adult_CB_CD34+,0.0662,-0.00103683908724201,3,Homo-Pan
+Adult_Chondrocyte,0.0927,0.00106544743394611,3,Homo-Pan
+Adult_Dendritic_cell,0.0035,-0.00118532454360795,3,Homo-Pan
+Adult_Endothelial_cell,0.0932,0.00077659101418641,3,Homo-Pan
+Adult_Endothelial_cell_(APC),0.0036,0.00123893017807807,3,Homo-Pan
+Adult_Endothelial_cell_(endothelial_to_mesenchymal_transition),2e-04,0.00207991266630956,3,Homo-Pan
+Adult_Enterocyte,0.2839,-0.000861772607799075,3,Homo-Pan
+Adult_Enterocyte_progenitor,0.1179,-0.000804355153333591,3,Homo-Pan
+Adult_Epithelial_cell,0.8578,-0.00014469775166721,3,Homo-Pan
+Adult_Epithelial_cell_(intermediated),0.6846,0.000232539687207495,3,Homo-Pan
+Adult_Erythroid_cell,0.0911,-0.000742557703981226,3,Homo-Pan
+Adult_Erythroid_progenitor_cell_(RP_high),0.0751,-0.000533963103175616,3,Homo-Pan
+Adult_Fasciculata_cell,0.1955,-0.00103474861801358,3,Homo-Pan
+Adult_Fetal_acinar_cell,0.6292,-0.000396963484937353,3,Homo-Pan
+Adult_Fetal_chondrocyte,0.0042,0.00204263178663402,3,Homo-Pan
+Adult_Fetal_endocrine_cell,0.8219,0.000202466927179856,3,Homo-Pan
+Adult_Fetal_enterocyte,0.2555,-0.000834030990310231,3,Homo-Pan
+Adult_Fetal_epithelial_progenitor,0.1307,-0.0017580874181885,3,Homo-Pan
+Adult_Fetal_fibroblast,7e-04,0.00199856192621229,3,Homo-Pan
+Adult_Fetal_mesenchymal_progenitor,0.0614,0.00109909055330225,3,Homo-Pan
+Adult_Fetal_neuron,0.5234,0.000714017249678196,3,Homo-Pan
+Adult_Fetal_Neuron,0.7571,0.000257017924112819,3,Homo-Pan
+Adult_Fetal_skeletal_muscle_cell,0.4853,-0.000519830184572843,3,Homo-Pan
+Adult_Fetal_stromal_cell,0.0096,0.0014653993450766,3,Homo-Pan
+Adult_Fibroblast,5e-04,0.00137654763888907,3,Homo-Pan
+Adult_Gastric_chief_cell,0.1117,0.00090755019458833,3,Homo-Pan
+Adult_Gastric_endocrine_cell,0.408,-0.000691325900417626,3,Homo-Pan
+Adult_Goblet_cell,0.5753,0.0004090937953945,3,Homo-Pan
+Adult_Hepatocyte_Endodermal_cell,0.7048,-0.00042662363046834,3,Homo-Pan
+Adult_hESC,0.3985,-0.000612076899102262,3,Homo-Pan
+Adult_Intercalated_cell,0.7577,-0.000195412259283954,3,Homo-Pan
+Adult_Intermediated_cell,0.9321,-5.99720230112702e-05,3,Homo-Pan
+Adult_Kidney_intercalated_cell,0.1703,0.00116142221229987,3,Homo-Pan
+Adult_Loop_of_Henle,0.2566,0.000640196256626491,3,Homo-Pan
+Adult_M2_Macrophage,0.617,-0.000225648745829243,3,Homo-Pan
+Adult_Macrophage,0.0944,-0.000726188661694448,3,Homo-Pan
+Adult_Mast_cell,0.116,0.000833305225911231,3,Homo-Pan
+Adult_Mesothelial_cell,0.4881,0.000474300991295197,3,Homo-Pan
+Adult_Monocyte,0.0212,-0.000845796985984518,3,Homo-Pan
+Adult_Myeloid_cell,0.2463,0.000779611434086821,3,Homo-Pan
+Adult_Neutrophil,0.3071,-0.000553733807170626,3,Homo-Pan
+Adult_Neutrophil_(RPS_high),0.0094,-0.00103177268059727,3,Homo-Pan
+Adult_Oligodendrocyte,2e-04,0.00502920664042117,3,Homo-Pan
+Adult_Pancreas_exocrine_cell,0.9801,1.94794036031018e-05,3,Homo-Pan
+Adult_Primordial_germ_cell,0.7643,-0.000204627792333524,3,Homo-Pan
+Adult_Proliferating_T_cell,0.0115,-0.00156082856987474,3,Homo-Pan
+Adult_Proximal_tubule_progenitor,0.1033,0.00160814985164136,3,Homo-Pan
+Adult_Sinusoidal_endothelial_cell,0.0662,-0.00154420525581835,3,Homo-Pan
+Adult_Smooth_muscle_cell,0.6158,0.000321754832044221,3,Homo-Pan
+Adult_Stratified_epithelial_cell,0.1887,-0.00121113628474545,3,Homo-Pan
+Adult_Stromal_cell,0.199,0.000449755571375447,3,Homo-Pan
+Adult_T_cell,8e-04,-0.002342496986107,3,Homo-Pan
+Adult_Thyroid_follicular_cell,0.5084,-0.000489666830673686,3,Homo-Pan
+Adult_Ureteric_bud_cell,0.1553,-0.000880719214149049,3,Homo-Pan
+Adult_Ventricle_cardiomyocyte,0.023,-0.00229356126431514,3,Homo-Pan
+Fetus_Adrenal_gland_inflammatory_cell,0.7889,-0.000185229320308437,3,Homo-Pan
+Fetus_Antigen_presenting_cell_(RPS_high),0.0367,-0.000524670599886656,3,Homo-Pan
+Fetus_Astrocyte,0.2895,0.00121384261469358,3,Homo-Pan
+Fetus_AT2_cell,0.2696,-0.000937294867127626,3,Homo-Pan
+Fetus_B_cell,0.4905,-0.000282266182907578,3,Homo-Pan
+Fetus_B_cell_(Plasmocyte),0.4097,-0.000419835738968579,3,Homo-Pan
+Fetus_Basal_cell,0.2675,0.000777328295596011,3,Homo-Pan
+Fetus_CB_CD34+,0.0067,-0.00103533885071159,3,Homo-Pan
+Fetus_Dendritic_cell,0.1661,-0.000381238139984521,3,Homo-Pan
+Fetus_Endothelial_cell,1e-04,0.00144156088478186,3,Homo-Pan
+Fetus_Endothelial_cell_(APC),0.0163,0.00123554315505464,3,Homo-Pan
+Fetus_Endothelial_cell_(endothelial_to_mesenchymal_transition),0.2069,0.000797293627021745,3,Homo-Pan
+Fetus_Enterocyte,0.9909,-6.49590048276397e-06,3,Homo-Pan
+Fetus_Enterocyte_progenitor,0.6637,0.000284882947279898,3,Homo-Pan
+Fetus_Epithelial_cell,0.2584,-0.00106934934946869,3,Homo-Pan
+Fetus_Epithelial_cell_(intermediated),0.7407,0.000205227245740103,3,Homo-Pan
+Fetus_Erythroid_cell,0.1322,-0.000631687510404577,3,Homo-Pan
+Fetus_Erythroid_progenitor_cell_(RP_high),0.0202,-0.000581694483025935,3,Homo-Pan
+Fetus_Fasciculata_cell,0.3752,0.000532072085587179,3,Homo-Pan
+Fetus_Fetal_acinar_cell,0.0352,0.00109983183570826,3,Homo-Pan
+Fetus_Fetal_chondrocyte,0.844,0.00011809397795994,3,Homo-Pan
+Fetus_Fetal_endocrine_cell,0.3557,0.000815564555867312,3,Homo-Pan
+Fetus_Fetal_enterocyte,0.5813,0.000122398494781591,3,Homo-Pan
+Fetus_Fetal_epithelial_progenitor,0.183,0.000559817683260128,3,Homo-Pan
+Fetus_Fetal_fibroblast,0.1622,0.000712405302493899,3,Homo-Pan
+Fetus_Fetal_mesenchymal_progenitor,0.0165,0.00093140252852682,3,Homo-Pan
+Fetus_Fetal_neuron,0.1544,0.00132571166382893,3,Homo-Pan
+Fetus_Fetal_Neuron,5e-04,0.0022480345143879,3,Homo-Pan
+Fetus_Fetal_skeletal_muscle_cell,0.9757,-1.86588671806195e-05,3,Homo-Pan
+Fetus_Fetal_stromal_cell,0.1711,0.000515233746725827,3,Homo-Pan
+Fetus_Fibroblast,0.2984,0.000572367941522673,3,Homo-Pan
+Fetus_Gastric_endocrine_cell,0.9159,-7.89187235567219e-05,3,Homo-Pan
+Fetus_Goblet_cell,0.2595,0.000529237201740658,3,Homo-Pan
+Fetus_Hepatocyte_Endodermal_cell,0.5431,-0.00037234854361076,3,Homo-Pan
+Fetus_hESC,0.2854,-0.000895529888787847,3,Homo-Pan
+Fetus_Immature_sertoli_cell_(Pre_Sertoli_cell),0.0475,0.00193672027252757,3,Homo-Pan
+Fetus_Intercalated_cell,0.59,-0.000343694505030914,3,Homo-Pan
+Fetus_Intermediated_cell,0.5359,0.000293622248104527,3,Homo-Pan
+Fetus_Kidney_intercalated_cell,0.0253,0.00112345099188516,3,Homo-Pan
+Fetus_Loop_of_Henle,0.8153,-0.000178441762417398,3,Homo-Pan
+Fetus_M2_Macrophage,0.2561,-0.000551350291949996,3,Homo-Pan
+Fetus_Macrophage,0.1207,0.0005336731511698,3,Homo-Pan
+Fetus_Mast_cell,0.4351,0.000465595146113506,3,Homo-Pan
+Fetus_Monocyte,0.0065,-0.000800415878180927,3,Homo-Pan
+Fetus_Myeloid_cell,0.2587,-0.000654483868648971,3,Homo-Pan
+Fetus_Neutrophil,0.1502,-0.000584279396034993,3,Homo-Pan
+Fetus_Neutrophil_(RPS_high),0.0185,-0.000727368137658956,3,Homo-Pan
+Fetus_Pancreas_exocrine_cell,0.5393,-0.000460094704319334,3,Homo-Pan
+Fetus_Primordial_germ_cell,0.0064,-0.00359123531593227,3,Homo-Pan
+Fetus_Proliferating_T_cell,0.0394,-0.00163267785108234,3,Homo-Pan
+Fetus_Proximal_tubule_progenitor,0.0677,0.00128968194277594,3,Homo-Pan
+Fetus_Sinusoidal_endothelial_cell,0.1319,-0.00156548973176933,3,Homo-Pan
+Fetus_Smooth_muscle_cell,0.0459,0.000790068629590218,3,Homo-Pan
+Fetus_Stratified_epithelial_cell,0.6338,0.000360477678106454,3,Homo-Pan
+Fetus_Stromal_cell,0.0025,0.0013443573810918,3,Homo-Pan
+Fetus_T_cell,0.0198,-0.00108385830176993,3,Homo-Pan
+Fetus_Ureteric_bud_cell,0.9464,-2.76544441118813e-05,3,Homo-Pan
+Fetus_Ventricle_cardiomyocyte,0.5112,0.000618794399386841,3,Homo-Pan
+HESC_Fetal_epithelial_progenitor,0.9666,-2.45731264914399e-05,3,Homo-Pan
+HESC_Fetal_neuron,0.5101,-0.000509426102852055,3,Homo-Pan
+HESC_hESC,0.7126,-0.000192379349456303,3,Homo-Pan
+HESC_Primordial_germ_cell,0.7131,-0.000214082374099152,3,Homo-Pan
+HESC_Proliferating_T_cell,0.6474,-0.000394977727789237,3,Homo-Pan
+Adult_Antigen_presenting_cell_(RPS_high),1e-04,-0.00138834156155156,3,Primate
+Adult_Astrocyte,0.0053,0.002357099857314,3,Primate
+Adult_AT2_cell,0.138,-0.00086522208662734,3,Primate
+Adult_B_cell,6e-04,-0.00125363636314321,3,Primate
+Adult_B_cell_(Plasmocyte),1e-04,-0.00471768406900556,3,Primate
+Adult_Basal_cell,0.5568,0.000404712453520478,3,Primate
+Adult_CB_CD34+,0.299,-0.000432617844340565,3,Primate
+Adult_Chondrocyte,0.7308,0.000163707934524671,3,Primate
+Adult_Dendritic_cell,1e-04,-0.00141046240645838,3,Primate
+Adult_Endothelial_cell,0.4224,0.000282793451095066,3,Primate
+Adult_Endothelial_cell_(APC),0.695,0.000119496954736504,3,Primate
+Adult_Endothelial_cell_(endothelial_to_mesenchymal_transition),0.2311,0.00040502432340699,3,Primate
+Adult_Enterocyte,0.0118,-0.00148931627504724,3,Primate
+Adult_Enterocyte_progenitor,0.4711,-0.000273522739532775,3,Primate
+Adult_Epithelial_cell,0.1349,-0.000859564916476171,3,Primate
+Adult_Epithelial_cell_(intermediated),0.3676,0.000389340374713097,3,Primate
+Adult_Erythroid_cell,0.838,-6.97049107633474e-05,3,Primate
+Adult_Erythroid_progenitor_cell_(RP_high),0.7657,-6.78353477148924e-05,3,Primate
+Adult_Fasciculata_cell,0.1819,-0.000794516889507528,3,Primate
+Adult_Fetal_acinar_cell,0.11,0.000970904496159998,3,Primate
+Adult_Fetal_chondrocyte,0.3076,0.000531693379886707,3,Primate
+Adult_Fetal_endocrine_cell,0.4571,0.000515914657081539,3,Primate
+Adult_Fetal_enterocyte,0.7251,-0.000184729240744514,3,Primate
+Adult_Fetal_epithelial_progenitor,0.0761,-0.00152385211413783,3,Primate
+Adult_Fetal_fibroblast,0.9134,4.63705194806403e-05,3,Primate
+Adult_Fetal_mesenchymal_progenitor,0.2661,0.000496001499219405,3,Primate
+Adult_Fetal_neuron,0.0192,0.00196204158411728,3,Primate
+Adult_Fetal_Neuron,0.4888,0.000419949047248141,3,Primate
+Adult_Fetal_skeletal_muscle_cell,0.2207,0.000662155160892804,3,Primate
+Adult_Fetal_stromal_cell,0.6486,-0.000192819915987165,3,Primate
+Adult_Fibroblast,0.4847,0.000202640876819006,3,Primate
+Adult_Gastric_chief_cell,0.953,-2.55893397834813e-05,3,Primate
+Adult_Gastric_endocrine_cell,0.3982,0.000534976730559468,3,Primate
+Adult_Goblet_cell,0.267,-0.000602438803175379,3,Primate
+Adult_Hepatocyte_Endodermal_cell,0.8522,-0.000159176947717259,3,Primate
+Adult_hESC,0.0494,-0.00105120642749821,3,Primate
+Adult_Intercalated_cell,0.9976,-1.23279311706193e-06,3,Primate
+Adult_Intermediated_cell,0.3119,0.000541840224697926,3,Primate
+Adult_Kidney_intercalated_cell,0.0075,0.0016501367391928,3,Primate
+Adult_Loop_of_Henle,0.2676,-0.000465614576337933,3,Primate
+Adult_M2_Macrophage,1e-04,-0.00132030373021025,3,Primate
+Adult_Macrophage,0.0024,-0.000972145933418461,3,Primate
+Adult_Mast_cell,0.289,-0.000415773701394286,3,Primate
+Adult_Mesothelial_cell,0.4043,-0.000420879170196537,3,Primate
+Adult_Monocyte,1e-04,-0.0013203587846265,3,Primate
+Adult_Myeloid_cell,0.7333,-0.000168511381269996,3,Primate
+Adult_Neutrophil,2e-04,-0.00154287665185852,3,Primate
+Adult_Neutrophil_(RPS_high),0.9799,7.74834947074854e-06,3,Primate
+Adult_Oligodendrocyte,0.015,0.00223016634056202,3,Primate
+Adult_Pancreas_exocrine_cell,0.1896,0.000843282068848274,3,Primate
+Adult_Primordial_germ_cell,0.1352,-0.000724195486523852,3,Primate
+Adult_Proliferating_T_cell,0.0519,-0.000897274832488363,3,Primate
+Adult_Proximal_tubule_progenitor,0.1103,0.00120037495383124,3,Primate
+Adult_Sinusoidal_endothelial_cell,0.002,-0.00187826794502535,3,Primate
+Adult_Smooth_muscle_cell,0.0386,0.000983049212277046,3,Primate
+Adult_Stratified_epithelial_cell,0.0064,-0.00187973893232519,3,Primate
+Adult_Stromal_cell,0.0298,-0.000572507402943923,3,Primate
+Adult_T_cell,0.0027,0.00148117881414246,3,Primate
+Adult_Thyroid_follicular_cell,0.4801,0.000385633932963639,3,Primate
+Adult_Ureteric_bud_cell,0.9739,-1.58176119922259e-05,3,Primate
+Adult_Ventricle_cardiomyocyte,0.7367,-0.000244135374870027,3,Primate
+Fetus_Adrenal_gland_inflammatory_cell,0.2451,0.000598049138192469,3,Primate
+Fetus_Antigen_presenting_cell_(RPS_high),0.0178,-0.000444163671411242,3,Primate
+Fetus_Astrocyte,0.0167,0.00200178794605823,3,Primate
+Fetus_AT2_cell,0.181,0.000842289931013498,3,Primate
+Fetus_B_cell,0.1909,-0.000394552157793093,3,Primate
+Fetus_B_cell_(Plasmocyte),0.7366,-0.000128951320854677,3,Primate
+Fetus_Basal_cell,0.1287,0.000784175354518799,3,Primate
+Fetus_CB_CD34+,0.1946,-0.000355366152580882,3,Primate
+Fetus_Dendritic_cell,6e-04,-0.000721535886255857,3,Primate
+Fetus_Endothelial_cell,0.0056,0.000667464127773826,3,Primate
+Fetus_Endothelial_cell_(APC),0.9872,5.85719924679695e-06,3,Primate
+Fetus_Endothelial_cell_(endothelial_to_mesenchymal_transition),0.0144,0.00114215614176768,3,Primate
+Fetus_Enterocyte,0.5461,-0.000293292253659708,3,Primate
+Fetus_Enterocyte_progenitor,0.9524,2.74475858296875e-05,3,Primate
+Fetus_Epithelial_cell,0.7661,-0.00020750998108675,3,Primate
+Fetus_Epithelial_cell_(intermediated),0.7558,-0.000141653660876163,3,Primate
+Fetus_Erythroid_cell,0.7719,-8.99168839430373e-05,3,Primate
+Fetus_Erythroid_progenitor_cell_(RP_high),0.1572,-0.000259707738286182,3,Primate
+Fetus_Fasciculata_cell,0.9151,4.3303996031739e-05,3,Primate
+Fetus_Fetal_acinar_cell,0.0127,0.000965119595350049,3,Primate
+Fetus_Fetal_chondrocyte,0.1538,0.00063968793472499,3,Primate
+Fetus_Fetal_endocrine_cell,0.0362,0.00134143378337793,3,Primate
+Fetus_Fetal_enterocyte,0.6793,-6.81306978878967e-05,3,Primate
+Fetus_Fetal_epithelial_progenitor,0.0435,0.000624296828572068,3,Primate
+Fetus_Fetal_fibroblast,0.0856,0.000647793122451687,3,Primate
+Fetus_Fetal_mesenchymal_progenitor,1e-04,0.00132858414616094,3,Primate
+Fetus_Fetal_neuron,0.0039,0.00199655050800821,3,Primate
+Fetus_Fetal_Neuron,0.3191,0.00044102123154161,3,Primate
+Fetus_Fetal_skeletal_muscle_cell,0.0033,0.00147713451257918,3,Primate
+Fetus_Fetal_stromal_cell,0.0017,0.000892635077854438,3,Primate
+Fetus_Fibroblast,0.9961,2.09747441870182e-06,3,Primate
+Fetus_Gastric_endocrine_cell,0.7366,-0.000190855952635383,3,Primate
+Fetus_Goblet_cell,0.1038,0.000558164769355286,3,Primate
+Fetus_Hepatocyte_Endodermal_cell,0.039,-0.000897755363043577,3,Primate
+Fetus_hESC,0.3735,-0.000551152400622796,3,Primate
+Fetus_Immature_sertoli_cell_(Pre_Sertoli_cell),0.0026,0.00226131699069119,3,Primate
+Fetus_Intercalated_cell,0.7953,0.000121206493730719,3,Primate
+Fetus_Intermediated_cell,0.1524,0.000504143620641909,3,Primate
+Fetus_Kidney_intercalated_cell,0.4753,-0.000273031012961708,3,Primate
+Fetus_Loop_of_Henle,0.9771,-1.64746386378102e-05,3,Primate
+Fetus_M2_Macrophage,0.0011,-0.00119974717677876,3,Primate
+Fetus_Macrophage,0.1628,-0.000357158892056463,3,Primate
+Fetus_Mast_cell,0.3061,-0.000453613618893789,3,Primate
+Fetus_Monocyte,0.1847,-0.000292751172238725,3,Primate
+Fetus_Myeloid_cell,0.0906,0.000716429149727088,3,Primate
+Fetus_Neutrophil,0.038,-0.000630208841098323,3,Primate
+Fetus_Neutrophil_(RPS_high),0.1821,-0.000302926320469411,3,Primate
+Fetus_Pancreas_exocrine_cell,0.44,-0.000435742112293566,3,Primate
+Fetus_Primordial_germ_cell,0.0051,-0.00270698150690102,3,Primate
+Fetus_Proliferating_T_cell,0.1857,-0.000786487639486103,3,Primate
+Fetus_Proximal_tubule_progenitor,0.0328,0.0011074288797279,3,Primate
+Fetus_Sinusoidal_endothelial_cell,0.0361,-0.00160980908627982,3,Primate
+Fetus_Smooth_muscle_cell,0.0043,0.000835713768490915,3,Primate
+Fetus_Stratified_epithelial_cell,0.155,-0.00081078099966463,3,Primate
+Fetus_Stromal_cell,0.0455,0.000652401968141806,3,Primate
+Fetus_T_cell,0.0741,0.000609164264723938,3,Primate
+Fetus_Ureteric_bud_cell,0.3466,0.000280828793151493,3,Primate
+Fetus_Ventricle_cardiomyocyte,0.3802,0.00060660022680561,3,Primate
+HESC_Fetal_epithelial_progenitor,0.5766,-0.000250525850509727,3,Primate
+HESC_Fetal_neuron,0.2348,-0.000670496799375747,3,Primate
+HESC_hESC,0.5578,0.000223307041450986,3,Primate
+HESC_Primordial_germ_cell,0.6991,0.000165677849774944,3,Primate
+HESC_Proliferating_T_cell,0.1932,0.000843651924270124,3,Primate
+Adult_Antigen_presenting_cell_(RPS_high),0.0016,-0.00112027084864449,3,Great Ape
+Adult_Astrocyte,5e-04,0.00342801141030837,3,Great Ape
+Adult_AT2_cell,0.3991,0.00058016281872085,3,Great Ape
+Adult_B_cell,0.0074,-0.00119588225969946,3,Great Ape
+Adult_B_cell_(Plasmocyte),0.0026,-0.00386977328972515,3,Great Ape
+Adult_Basal_cell,0.1937,0.00104882276574603,3,Great Ape
+Adult_CB_CD34+,0.4063,-0.000407452845616191,3,Great Ape
+Adult_Chondrocyte,0.6313,0.000270858262994434,3,Great Ape
+Adult_Dendritic_cell,0.0116,-0.000874348573727285,3,Great Ape
+Adult_Endothelial_cell,0.0335,0.000882863226828136,3,Great Ape
+Adult_Endothelial_cell_(APC),0.005,0.00102155687911244,3,Great Ape
+Adult_Endothelial_cell_(endothelial_to_mesenchymal_transition),0.0027,0.00125952482328635,3,Great Ape
+Adult_Enterocyte,0.0772,-0.00125813422752142,3,Great Ape
+Adult_Enterocyte_progenitor,0.3542,-0.000420540680388202,3,Great Ape
+Adult_Epithelial_cell,0.2398,-0.000811063513831268,3,Great Ape
+Adult_Epithelial_cell_(intermediated),0.1076,0.000819114153646998,3,Great Ape
+Adult_Erythroid_cell,0.2875,-0.000425135094020473,3,Great Ape
+Adult_Erythroid_progenitor_cell_(RP_high),0.0264,-0.000590836769292556,3,Great Ape
+Adult_Fasciculata_cell,0.4786,-0.000496237831657373,3,Great Ape
+Adult_Fetal_acinar_cell,0.1085,-0.00117886495933579,3,Great Ape
+Adult_Fetal_chondrocyte,0.6723,-0.000263622846698964,3,Great Ape
+Adult_Fetal_endocrine_cell,0.8985,-0.000100585378361958,3,Great Ape
+Adult_Fetal_enterocyte,0.9836,1.48451947650067e-05,3,Great Ape
+Adult_Fetal_epithelial_progenitor,0.0131,-0.00246206638894321,3,Great Ape
+Adult_Fetal_fibroblast,0.0641,0.000937877772778287,3,Great Ape
+Adult_Fetal_mesenchymal_progenitor,0.8366,-0.000107821667034181,3,Great Ape
+Adult_Fetal_neuron,0.0233,0.00230336942523917,3,Great Ape
+Adult_Fetal_Neuron,0.255,0.000831995446927033,3,Great Ape
+Adult_Fetal_skeletal_muscle_cell,0.9948,-3.5638239029052e-06,3,Great Ape
+Adult_Fetal_stromal_cell,0.578,0.000277808034678666,3,Great Ape
+Adult_Fibroblast,5e-04,0.00122510999955745,3,Great Ape
+Adult_Gastric_chief_cell,0.3198,0.000508329599396201,3,Great Ape
+Adult_Gastric_endocrine_cell,0.68,-0.000312550843051835,3,Great Ape
+Adult_Goblet_cell,0.5013,-0.000440580273269748,3,Great Ape
+Adult_Hepatocyte_Endodermal_cell,0.1549,0.00147706506519255,3,Great Ape
+Adult_hESC,0.0225,-0.00144701541097863,3,Great Ape
+Adult_Intercalated_cell,0.7146,0.000202645423350601,3,Great Ape
+Adult_Intermediated_cell,0.7345,-0.000214072316594848,3,Great Ape
+Adult_Kidney_intercalated_cell,0.606,0.000381477889146221,3,Great Ape
+Adult_Loop_of_Henle,0.7779,0.000142497566939781,3,Great Ape
+Adult_M2_Macrophage,0.0076,-0.00112232351291365,3,Great Ape
+Adult_Macrophage,0.1333,-0.00057310448242644,3,Great Ape
+Adult_Mast_cell,0.4723,-0.000338572622797231,3,Great Ape
+Adult_Mesothelial_cell,0.009,0.00160406083676205,3,Great Ape
+Adult_Monocyte,8e-04,-0.00110100127994525,3,Great Ape
+Adult_Myeloid_cell,0.2508,-0.000667624740338698,3,Great Ape
+Adult_Neutrophil,0.0034,-0.00143109103733523,3,Great Ape
+Adult_Neutrophil_(RPS_high),0.0503,-0.00068538408514301,3,Great Ape
+Adult_Oligodendrocyte,1e-04,0.005292718441329,3,Great Ape
+Adult_Pancreas_exocrine_cell,0.142,-0.00112996185426918,3,Great Ape
+Adult_Primordial_germ_cell,0.8679,-0.000100243682340663,3,Great Ape
+Adult_Proliferating_T_cell,0.108,-0.000880130111793665,3,Great Ape
+Adult_Proximal_tubule_progenitor,0.0413,0.00183729232686825,3,Great Ape
+Adult_Sinusoidal_endothelial_cell,0.0836,-0.00126940070162374,3,Great Ape
+Adult_Smooth_muscle_cell,0.0207,0.00131308127282209,3,Great Ape
+Adult_Stratified_epithelial_cell,0.0291,-0.0017799173892852,3,Great Ape
+Adult_Stromal_cell,0.0152,0.000752873937599564,3,Great Ape
+Adult_T_cell,2e-04,-0.00240905329532701,3,Great Ape
+Adult_Thyroid_follicular_cell,0.9881,-9.10922980804797e-06,3,Great Ape
+Adult_Ureteric_bud_cell,0.0846,-0.000945616525204032,3,Great Ape
+Adult_Ventricle_cardiomyocyte,0.708,-0.000337042199829056,3,Great Ape
+Fetus_Adrenal_gland_inflammatory_cell,0.3717,0.000552689678125093,3,Great Ape
+Fetus_Antigen_presenting_cell_(RPS_high),3e-04,-0.000900630828189635,3,Great Ape
+Fetus_Astrocyte,0.0141,0.00237572491784415,3,Great Ape
+Fetus_AT2_cell,0.5583,0.000448320939082296,3,Great Ape
+Fetus_B_cell,0.0347,-0.000767324738954264,3,Great Ape
+Fetus_B_cell_(Plasmocyte),0.3066,-0.0004672914938195,3,Great Ape
+Fetus_Basal_cell,0.0261,0.0013592156051847,3,Great Ape
+Fetus_CB_CD34+,0.3662,-0.000295616965370807,3,Great Ape
+Fetus_Dendritic_cell,0.0238,-0.000537446080579845,3,Great Ape
+Fetus_Endothelial_cell,1e-04,0.00112223975641286,3,Great Ape
+Fetus_Endothelial_cell_(APC),0.0373,0.000938888492224531,3,Great Ape
+Fetus_Endothelial_cell_(endothelial_to_mesenchymal_transition),0.2264,0.000679987117103841,3,Great Ape
+Fetus_Enterocyte,0.4264,-0.000452597582979787,3,Great Ape
+Fetus_Enterocyte_progenitor,0.1743,0.000786289312225974,3,Great Ape
+Fetus_Epithelial_cell,0.1371,-0.00123386908542756,3,Great Ape
+Fetus_Epithelial_cell_(intermediated),0.2709,-0.000609226916201779,3,Great Ape
+Fetus_Erythroid_cell,0.054,-0.000709434062526631,3,Great Ape
+Fetus_Erythroid_progenitor_cell_(RP_high),0.037,-0.000448072178468129,3,Great Ape
+Fetus_Fasciculata_cell,0.2224,0.000637473492000416,3,Great Ape
+Fetus_Fetal_acinar_cell,0.3097,0.000468204029242084,3,Great Ape
+Fetus_Fetal_chondrocyte,0.0949,0.000897518184564913,3,Great Ape
+Fetus_Fetal_endocrine_cell,0.0101,0.00199974816932127,3,Great Ape
+Fetus_Fetal_enterocyte,0.6881,8.07287811803378e-05,3,Great Ape
+Fetus_Fetal_epithelial_progenitor,0.4835,0.000265148747571855,3,Great Ape
+Fetus_Fetal_fibroblast,0.0936,0.000764894664500688,3,Great Ape
+Fetus_Fetal_mesenchymal_progenitor,0.0054,0.000953249163028207,3,Great Ape
+Fetus_Fetal_neuron,0.9298,6.67486724373333e-05,3,Great Ape
+Fetus_Fetal_Neuron,2e-04,0.00213735966911791,3,Great Ape
+Fetus_Fetal_skeletal_muscle_cell,0.1988,0.000773667721455791,3,Great Ape
+Fetus_Fetal_stromal_cell,3e-04,0.00135953178900269,3,Great Ape
+Fetus_Fibroblast,0.3432,-0.000471739456024446,3,Great Ape
+Fetus_Gastric_endocrine_cell,0.6622,-0.000302936058878239,3,Great Ape
+Fetus_Goblet_cell,0.8006,0.000102581397541456,3,Great Ape
+Fetus_Hepatocyte_Endodermal_cell,0.1533,-0.000749167110796474,3,Great Ape
+Fetus_hESC,0.0863,-0.00126044292507105,3,Great Ape
+Fetus_Immature_sertoli_cell_(Pre_Sertoli_cell),0.1794,0.00117439164660281,3,Great Ape
+Fetus_Intercalated_cell,0.5844,-0.000305651888439467,3,Great Ape
+Fetus_Intermediated_cell,0.8859,6.08286858057102e-05,3,Great Ape
+Fetus_Kidney_intercalated_cell,0.0623,0.000834955022762917,3,Great Ape
+Fetus_Loop_of_Henle,0.8237,0.000142969759161807,3,Great Ape
+Fetus_M2_Macrophage,0.0132,-0.00106509941242178,3,Great Ape
+Fetus_Macrophage,0.9883,3.92484373421516e-06,3,Great Ape
+Fetus_Mast_cell,0.5217,0.000343599785208811,3,Great Ape
+Fetus_Monocyte,4e-04,-0.000965200930117392,3,Great Ape
+Fetus_Myeloid_cell,0.6501,0.000227018061877622,3,Great Ape
+Fetus_Neutrophil,4e-04,-0.00135274773854757,3,Great Ape
+Fetus_Neutrophil_(RPS_high),0.0384,-0.000546297908177246,3,Great Ape
+Fetus_Pancreas_exocrine_cell,0.311,0.000681177991112748,3,Great Ape
+Fetus_Primordial_germ_cell,0.249,-0.00132957076243957,3,Great Ape
+Fetus_Proliferating_T_cell,0.3407,-0.000687669947236304,3,Great Ape
+Fetus_Proximal_tubule_progenitor,0.0014,0.00204581862022862,3,Great Ape
+Fetus_Sinusoidal_endothelial_cell,0.1963,-0.00117845789552962,3,Great Ape
+Fetus_Smooth_muscle_cell,0.0288,0.00076205291824955,3,Great Ape
+Fetus_Stratified_epithelial_cell,0.8709,0.000110632455275501,3,Great Ape
+Fetus_Stromal_cell,0.5659,0.000223563371870174,3,Great Ape
+Fetus_T_cell,0.001,-0.00132245975171278,3,Great Ape
+Fetus_Ureteric_bud_cell,0.6719,0.000150385848176281,3,Great Ape
+Fetus_Ventricle_cardiomyocyte,0.4222,0.000673877069789675,3,Great Ape
+HESC_Fetal_epithelial_progenitor,0.3421,-0.000499878335558079,3,Great Ape
+HESC_Fetal_neuron,0.816,0.000156275433659719,3,Great Ape
+HESC_hESC,0.0693,-0.000837420894866024,3,Great Ape
+HESC_Primordial_germ_cell,0.043,-0.00102239137695001,3,Great Ape
+HESC_Proliferating_T_cell,0.0247,-0.00167700193627567,3,Great Ape
+Adult_Antigen_presenting_cell_(RPS_high),0.0639,-0.000577990375413681,3,Haplorhine
+Adult_Astrocyte,0.2184,0.00113384220270256,3,Haplorhine
+Adult_AT2_cell,0.6646,0.000273872456042713,3,Haplorhine
+Adult_B_cell,3e-04,-0.00158134825759005,3,Haplorhine
+Adult_B_cell_(Plasmocyte),1e-04,-0.00541733896462359,3,Haplorhine
+Adult_Basal_cell,0.9003,9.20074386466383e-05,3,Haplorhine
+Adult_CB_CD34+,0.3946,-0.000380458557329288,3,Haplorhine
+Adult_Chondrocyte,0.0061,0.00140681618074378,3,Haplorhine
+Adult_Dendritic_cell,0.1002,-0.000520552062993652,3,Haplorhine
+Adult_Endothelial_cell,0.3164,0.000384722165969913,3,Haplorhine
+Adult_Endothelial_cell_(APC),0.8762,-4.95787435499389e-05,3,Haplorhine
+Adult_Endothelial_cell_(endothelial_to_mesenchymal_transition),0.0894,0.000634716805043853,3,Haplorhine
+Adult_Enterocyte,0.044,-0.00132020772632906,3,Haplorhine
+Adult_Enterocyte_progenitor,0.2551,-0.000477023907410849,3,Haplorhine
+Adult_Epithelial_cell,0.0558,-0.00119797799019382,3,Haplorhine
+Adult_Epithelial_cell_(intermediated),0.6526,0.000211341347137331,3,Haplorhine
+Adult_Erythroid_cell,0.0291,-0.000788700878385996,3,Haplorhine
+Adult_Erythroid_progenitor_cell_(RP_high),0.0116,-0.0006189076214232,3,Haplorhine
+Adult_Fasciculata_cell,0.0026,-0.00192232694040473,3,Haplorhine
+Adult_Fetal_acinar_cell,0.0188,0.00159970454751919,3,Haplorhine
+Adult_Fetal_chondrocyte,0.0112,0.00146375350794932,3,Haplorhine
+Adult_Fetal_endocrine_cell,0.0744,0.00132913791673252,3,Haplorhine
+Adult_Fetal_enterocyte,0.9181,6.25266623766045e-05,3,Haplorhine
+Adult_Fetal_epithelial_progenitor,0.161,-0.00132579804424739,3,Haplorhine
+Adult_Fetal_fibroblast,6e-04,0.00156804735202701,3,Haplorhine
+Adult_Fetal_mesenchymal_progenitor,0.8743,-7.62989229143888e-05,3,Haplorhine
+Adult_Fetal_neuron,0.0106,0.00233234124553696,3,Haplorhine
+Adult_Fetal_Neuron,0.6972,-0.000262433900910292,3,Haplorhine
+Adult_Fetal_skeletal_muscle_cell,0.3479,0.00057657131319684,3,Haplorhine
+Adult_Fetal_stromal_cell,0.0465,0.000921194278735113,3,Haplorhine
+Adult_Fibroblast,0.9607,1.54240379592005e-05,3,Haplorhine
+Adult_Gastric_chief_cell,0.9896,-6.32243129299984e-06,3,Haplorhine
+Adult_Gastric_endocrine_cell,0.3809,0.000609013712692905,3,Haplorhine
+Adult_Goblet_cell,0.0095,-0.00154020225705958,3,Haplorhine
+Adult_Hepatocyte_Endodermal_cell,0.791,-0.000258864562862134,3,Haplorhine
+Adult_hESC,0.7575,-0.000185130731617414,3,Haplorhine
+Adult_Intercalated_cell,0.1473,-0.000747536369717078,3,Haplorhine
+Adult_Intermediated_cell,0.4894,-0.000400743642003363,3,Haplorhine
+Adult_Kidney_intercalated_cell,0.6505,0.000312364685371597,3,Haplorhine
+Adult_Loop_of_Henle,0.324,0.000458103283027086,3,Haplorhine
+Adult_M2_Macrophage,0.1975,-0.000479082267232981,3,Haplorhine
+Adult_Macrophage,0.0019,-0.00109220473996629,3,Haplorhine
+Adult_Mast_cell,0.1423,-0.000624468327075714,3,Haplorhine
+Adult_Mesothelial_cell,0.7661,0.00016217079504388,3,Haplorhine
+Adult_Monocyte,0.0288,-0.000639176781503082,3,Haplorhine
+Adult_Myeloid_cell,0.9152,-6.07723777955519e-05,3,Haplorhine
+Adult_Neutrophil,0.0023,-0.00141680152206922,3,Haplorhine
+Adult_Neutrophil_(RPS_high),0.2996,-0.000334611881761973,3,Haplorhine
+Adult_Oligodendrocyte,5e-04,0.00346206387275315,3,Haplorhine
+Adult_Pancreas_exocrine_cell,0.3367,0.000671332113361361,3,Haplorhine
+Adult_Primordial_germ_cell,0.9735,-1.99304555706065e-05,3,Haplorhine
+Adult_Proliferating_T_cell,0.0303,-0.00108458509821645,3,Haplorhine
+Adult_Proximal_tubule_progenitor,0.0343,0.00171454737285728,3,Haplorhine
+Adult_Sinusoidal_endothelial_cell,1e-04,-0.00266761318358279,3,Haplorhine
+Adult_Smooth_muscle_cell,0.1342,0.000782480898130144,3,Haplorhine
+Adult_Stratified_epithelial_cell,0.0628,-0.00138701920091658,3,Haplorhine
+Adult_Stromal_cell,0.2559,-0.000334294568429861,3,Haplorhine
+Adult_T_cell,1e-04,-0.00285249926262713,3,Haplorhine
+Adult_Thyroid_follicular_cell,0.5615,-0.000353348701823132,3,Haplorhine
+Adult_Ureteric_bud_cell,0.9408,-3.87512491096204e-05,3,Haplorhine
+Adult_Ventricle_cardiomyocyte,0.5163,-0.000537928635721785,3,Haplorhine
+Fetus_Adrenal_gland_inflammatory_cell,0.9147,-6.28807690007912e-05,3,Haplorhine
+Fetus_Antigen_presenting_cell_(RPS_high),0.0012,-0.000678332961953589,3,Haplorhine
+Fetus_Astrocyte,0.0048,0.00262686711208965,3,Haplorhine
+Fetus_AT2_cell,0.3631,0.000636382184220307,3,Haplorhine
+Fetus_B_cell,0.0022,-0.00104640541369089,3,Haplorhine
+Fetus_B_cell_(Plasmocyte),0.0285,-0.000926617276216818,3,Haplorhine
+Fetus_Basal_cell,0.097,0.000950186439248744,3,Haplorhine
+Fetus_CB_CD34+,0.0037,-0.000844557891570621,3,Haplorhine
+Fetus_Dendritic_cell,0.0379,-0.000473578286042676,3,Haplorhine
+Fetus_Endothelial_cell,0.0022,0.000796942128098895,3,Haplorhine
+Fetus_Endothelial_cell_(APC),0.8753,6.62596029737321e-05,3,Haplorhine
+Fetus_Endothelial_cell_(endothelial_to_mesenchymal_transition),0.2836,0.000556677063256065,3,Haplorhine
+Fetus_Enterocyte,0.5971,0.000274982891363706,3,Haplorhine
+Fetus_Enterocyte_progenitor,0.1531,0.00075257104533781,3,Haplorhine
+Fetus_Epithelial_cell,0.0204,-0.00177478842045329,3,Haplorhine
+Fetus_Epithelial_cell_(intermediated),0.2986,-0.000534826959320438,3,Haplorhine
+Fetus_Erythroid_cell,0.4912,-0.000239062835934679,3,Haplorhine
+Fetus_Erythroid_progenitor_cell_(RP_high),0.0158,-0.00048940763081218,3,Haplorhine
+Fetus_Fasciculata_cell,0.2271,0.000584075112243867,3,Haplorhine
+Fetus_Fetal_acinar_cell,0.0032,0.0012653445778579,3,Haplorhine
+Fetus_Fetal_chondrocyte,0.044,0.00099112117861067,3,Haplorhine
+Fetus_Fetal_endocrine_cell,0.0483,0.00140650258968225,3,Haplorhine
+Fetus_Fetal_enterocyte,0.5403,-0.000109440584988762,3,Haplorhine
+Fetus_Fetal_epithelial_progenitor,0.0348,0.000720738359919875,3,Haplorhine
+Fetus_Fetal_fibroblast,6e-04,0.00147797002408565,3,Haplorhine
+Fetus_Fetal_mesenchymal_progenitor,0.0038,0.000920073046284605,3,Haplorhine
+Fetus_Fetal_neuron,0.0084,0.00203821933293113,3,Haplorhine
+Fetus_Fetal_Neuron,2e-04,0.00196191281209145,3,Haplorhine
+Fetus_Fetal_skeletal_muscle_cell,0.3654,0.000499611777895358,3,Haplorhine
+Fetus_Fetal_stromal_cell,0.0047,0.00086454436143435,3,Haplorhine
+Fetus_Fibroblast,0.0031,0.00140495449980529,3,Haplorhine
+Fetus_Gastric_endocrine_cell,0.1304,0.000938118398191869,3,Haplorhine
+Fetus_Goblet_cell,0.332,0.000375966253402846,3,Haplorhine
+Fetus_Hepatocyte_Endodermal_cell,0.2085,-0.000608982016700688,3,Haplorhine
+Fetus_hESC,0.4205,-0.000543615681979271,3,Haplorhine
+Fetus_Immature_sertoli_cell_(Pre_Sertoli_cell),0.5159,0.000519829086002258,3,Haplorhine
+Fetus_Intercalated_cell,0.6943,-0.000196865339901985,3,Haplorhine
+Fetus_Intermediated_cell,0.39,0.000328549481460679,3,Haplorhine
+Fetus_Kidney_intercalated_cell,0.0406,0.000819461782442142,3,Haplorhine
+Fetus_Loop_of_Henle,0.8096,0.000143781278594263,3,Haplorhine
+Fetus_M2_Macrophage,0.3121,-0.000402914384559239,3,Haplorhine
+Fetus_Macrophage,0.2183,-0.000346878762983636,3,Haplorhine
+Fetus_Mast_cell,0.0592,-0.000917065669331919,3,Haplorhine
+Fetus_Monocyte,0.0012,-0.00078010412014159,3,Haplorhine
+Fetus_Myeloid_cell,0.5724,0.000263183263436787,3,Haplorhine
+Fetus_Neutrophil,8e-04,-0.00114189138787454,3,Haplorhine
+Fetus_Neutrophil_(RPS_high),0.0462,-0.000483085398881681,3,Haplorhine
+Fetus_Pancreas_exocrine_cell,0.5463,0.000378635612188636,3,Haplorhine
+Fetus_Primordial_germ_cell,0.0102,-0.00271782975468916,3,Haplorhine
+Fetus_Proliferating_T_cell,0.0558,-0.00126198595622024,3,Haplorhine
+Fetus_Proximal_tubule_progenitor,0.2136,0.000718678120156148,3,Haplorhine
+Fetus_Sinusoidal_endothelial_cell,0.2677,-0.000926576941322258,3,Haplorhine
+Fetus_Smooth_muscle_cell,0.0024,0.000972555330713516,3,Haplorhine
+Fetus_Stratified_epithelial_cell,0.0813,-0.00109620514631405,3,Haplorhine
+Fetus_Stromal_cell,0.0018,0.00111442178551905,3,Haplorhine
+Fetus_T_cell,1e-04,-0.00163183171916685,3,Haplorhine
+Fetus_Ureteric_bud_cell,0.2138,-0.00039956369634263,3,Haplorhine
+Fetus_Ventricle_cardiomyocyte,0.7184,0.000268144596294385,3,Haplorhine
+HESC_Fetal_epithelial_progenitor,0.4143,0.00040714402461226,3,Haplorhine
+HESC_Fetal_neuron,0.2028,0.000812173038469328,3,Haplorhine
+HESC_hESC,0.3963,0.000363575425700282,3,Haplorhine
+HESC_Primordial_germ_cell,0.8389,9.62053508865599e-05,3,Haplorhine
+HESC_Proliferating_T_cell,2e-04,0.00271967486114721,3,Haplorhine

@@ -1,0 +1,196 @@
+celltype,p,coefs,ctd_level,branch
+Astrocytes,0.4168,-0.00529232215266585,4,Homo-Pan
+Cerebellum neurons,0.2192,-0.00654640051805695,4,Homo-Pan
+Cholinergic and monoaminergic neurons,0.2448,-0.00609924860520404,4,Homo-Pan
+Choroid epithelial cells,0.64,0.00410154209490431,4,Homo-Pan
+Dentate gyrus granule neurons,0.8377,0.000936129625908698,4,Homo-Pan
+Dentate gyrus radial glia-like cells,0.427,-0.00369302902300009,4,Homo-Pan
+Di- and mesencephalon excitatory neurons,0.6748,-0.001637090578812,4,Homo-Pan
+Di- and mesencephalon inhibitory neurons,0.7077,0.00137383036747186,4,Homo-Pan
+Enteric glia,0.5712,-0.00363509872449158,4,Homo-Pan
+Enteric neurons,0.4111,-0.00488723292630712,4,Homo-Pan
+Ependymal cells,0.4783,0.00974677441888235,4,Homo-Pan
+Glutamatergic neuroblasts,0.7135,-0.0017707919975368,4,Homo-Pan
+Hindbrain neurons,0.8145,0.00121356523188948,4,Homo-Pan
+Microglia,0.8586,-0.00231443124479009,4,Homo-Pan
+Non-glutamatergic neuroblasts,0.0514,-0.00904244198820456,4,Homo-Pan
+Olfactory ensheathing cells,0.3394,-0.00610817471580323,4,Homo-Pan
+Olfactory inhibitory neurons,0.6474,0.00216311052970422,4,Homo-Pan
+Oligodendrocyte precursor cells,0.6361,-0.00402649503398504,4,Homo-Pan
+Oligodendrocytes,0.9302,0.000639320549069472,4,Homo-Pan
+Peptidergic neurons,0.3296,-0.00348612449313836,4,Homo-Pan
+Pericytes,0.0508,0.0131073639174621,4,Homo-Pan
+Peripheral sensory neurofilament neurons,0.067,-0.00988050844588379,4,Homo-Pan
+Peripheral sensory non-peptidergic neurons,0.1353,-0.00903304627040376,4,Homo-Pan
+Peripheral sensory peptidergic neurons,0.1608,-0.0066902416721791,4,Homo-Pan
+Perivascular macrophages,0.7668,0.00383286183046679,4,Homo-Pan
+Satellite glia,0.0748,-0.00859940960381838,4,Homo-Pan
+Schwann cells,0.1777,-0.00836369160196472,4,Homo-Pan
+Spinal cord excitatory neurons,0.0046,0.0203866208226807,4,Homo-Pan
+Spinal cord inhibitory neurons,0.5575,-0.00252807563694501,4,Homo-Pan
+Subcommissural organ hypendymal cells,0.0481,0.0190655709144856,4,Homo-Pan
+Subventricular zone radial glia-like cells,0.0202,0.0116996381216705,4,Homo-Pan
+Sympathetic cholinergic neurons,0.0652,-0.00775165742409501,4,Homo-Pan
+Sympathetic noradrenergic neurons,0.3117,-0.00451676305741269,4,Homo-Pan
+Telencephalon inhibitory interneurons,0.5845,0.00201181671036,4,Homo-Pan
+Telencephalon projecting excitatory neurons,0.6636,-0.00203278258600871,4,Homo-Pan
+Telencephalon projecting inhibitory neurons,0.0604,-0.0110075212204198,4,Homo-Pan
+Vascular and leptomeningeal cells,0.0277,0.0227565002377195,4,Homo-Pan
+Vascular endothelial cells,0.2083,0.00936172530903671,4,Homo-Pan
+Vascular smooth muscle cells,0.4642,0.00654619770062654,4,Homo-Pan
+Astrocytes,0.9577,0.000128615823147414,4,Primate
+Cerebellum neurons,0.2141,-0.00277334102856432,4,Primate
+Cholinergic and monoaminergic neurons,0.1773,0.00283913522482528,4,Primate
+Choroid epithelial cells,0.2587,-0.00339115618287414,4,Primate
+Dentate gyrus granule neurons,0.0477,-0.00327986815207079,4,Primate
+Dentate gyrus radial glia-like cells,0.023,-0.00416946629225225,4,Primate
+Di- and mesencephalon excitatory neurons,0.0375,-0.00350214368851331,4,Primate
+Di- and mesencephalon inhibitory neurons,0.0333,-0.00326225415843873,4,Primate
+Enteric glia,0.4665,-0.00173341142040792,4,Primate
+Enteric neurons,0.2487,0.00264803160861796,4,Primate
+Ependymal cells,0.0019,0.0157764940465833,4,Primate
+Glutamatergic neuroblasts,0.5956,-0.0010465165820146,4,Primate
+Hindbrain neurons,0.8843,-0.000271884924840731,4,Primate
+Microglia,0.1277,0.00639217433007477,4,Primate
+Non-glutamatergic neuroblasts,0.222,-0.00209259183468326,4,Primate
+Olfactory ensheathing cells,0.2246,0.0030511533849042,4,Primate
+Olfactory inhibitory neurons,0.0047,-0.0054601423733511,4,Primate
+Oligodendrocyte precursor cells,0.6503,0.00133063817884579,4,Primate
+Oligodendrocytes,4e-04,0.0103383151318572,4,Primate
+Peptidergic neurons,0.0827,-0.00269761473704096,4,Primate
+Pericytes,0.3348,0.00248019321480764,4,Primate
+Peripheral sensory neurofilament neurons,0.6713,0.000865628844476363,4,Primate
+Peripheral sensory non-peptidergic neurons,0.1181,-0.00392118171029473,4,Primate
+Peripheral sensory peptidergic neurons,0.4255,-0.00149066924055238,4,Primate
+Perivascular macrophages,0.0081,0.011301688199204,4,Primate
+Satellite glia,0.227,-0.00219020778204191,4,Primate
+Schwann cells,0.3655,-0.002390814900071,4,Primate
+Spinal cord excitatory neurons,0.3235,-0.0016886428875786,4,Primate
+Spinal cord inhibitory neurons,0.0086,-0.00490603578873235,4,Primate
+Subcommissural organ hypendymal cells,0.5481,-0.00216180070580306,4,Primate
+Subventricular zone radial glia-like cells,0.0196,-0.00396789062984906,4,Primate
+Sympathetic cholinergic neurons,0.2191,-0.00198538212834598,4,Primate
+Sympathetic noradrenergic neurons,0.2053,-0.00229989026513309,4,Primate
+Telencephalon inhibitory interneurons,0.0847,-0.00266299192307816,4,Primate
+Telencephalon projecting excitatory neurons,0.283,-0.00181855791633898,4,Primate
+Telencephalon projecting inhibitory neurons,0.3144,0.00219523838484947,4,Primate
+Vascular and leptomeningeal cells,0.6705,0.00143702660558907,4,Primate
+Vascular endothelial cells,0.447,0.00214859527026006,4,Primate
+Vascular smooth muscle cells,0.4859,0.00223150316316414,4,Primate
+Astrocytes,0.8456,-0.0010683640485198,4,Great Ape
+Cerebellum neurons,0.6147,-0.00244647701183126,4,Great Ape
+Cholinergic and monoaminergic neurons,0.1793,-0.00590833260727592,4,Great Ape
+Choroid epithelial cells,0.557,-0.00409845980281251,4,Great Ape
+Dentate gyrus granule neurons,0.0695,-0.00661509578268522,4,Great Ape
+Dentate gyrus radial glia-like cells,0.0706,0.00713084533905725,4,Great Ape
+Di- and mesencephalon excitatory neurons,0.0225,-0.00924318545642177,4,Great Ape
+Di- and mesencephalon inhibitory neurons,0.073,-0.0057678853687237,4,Great Ape
+Enteric glia,0.9551,0.000297748510021256,4,Great Ape
+Enteric neurons,0.4731,0.00369488151270785,4,Great Ape
+Ependymal cells,0.3715,0.00985506011636883,4,Great Ape
+Glutamatergic neuroblasts,0.0638,-0.00813369803745182,4,Great Ape
+Hindbrain neurons,0.0506,-0.0081446256053566,4,Great Ape
+Microglia,0.0092,0.0285545163885935,4,Great Ape
+Non-glutamatergic neuroblasts,0.0504,-0.00726440070637421,4,Great Ape
+Olfactory ensheathing cells,0.2181,-0.00639743180269684,4,Great Ape
+Olfactory inhibitory neurons,0.0566,-0.00762638437910612,4,Great Ape
+Oligodendrocyte precursor cells,0.4049,-0.00541097549553898,4,Great Ape
+Oligodendrocytes,0.1109,-0.00854237251262757,4,Great Ape
+Peptidergic neurons,0.5433,-0.00186099022731678,4,Great Ape
+Pericytes,0.4612,0.00417467591665905,4,Great Ape
+Peripheral sensory neurofilament neurons,0.2822,-0.00473247543019477,4,Great Ape
+Peripheral sensory non-peptidergic neurons,0.2419,0.00610436060715376,4,Great Ape
+Peripheral sensory peptidergic neurons,0.2058,-0.00501662767340436,4,Great Ape
+Perivascular macrophages,1e-04,0.0562141280972298,4,Great Ape
+Satellite glia,0.1708,-0.00533502102755701,4,Great Ape
+Schwann cells,0.7255,0.00216962719277472,4,Great Ape
+Spinal cord excitatory neurons,0.6626,-0.00163819535256816,4,Great Ape
+Spinal cord inhibitory neurons,0.4276,-0.00279559044170193,4,Great Ape
+Subcommissural organ hypendymal cells,0.5779,-0.00444264631963497,4,Great Ape
+Subventricular zone radial glia-like cells,0.5459,-0.00219680709219846,4,Great Ape
+Sympathetic cholinergic neurons,0.5398,0.00208375900345161,4,Great Ape
+Sympathetic noradrenergic neurons,0.1885,0.00488818045248177,4,Great Ape
+Telencephalon inhibitory interneurons,0.1148,-0.00508971383246397,4,Great Ape
+Telencephalon projecting excitatory neurons,0.0163,-0.00984002122179064,4,Great Ape
+Telencephalon projecting inhibitory neurons,0.4004,-0.00401476386453873,4,Great Ape
+Vascular and leptomeningeal cells,0.3914,0.00665288631171061,4,Great Ape
+Vascular endothelial cells,0.2336,0.00740445977975088,4,Great Ape
+Vascular smooth muscle cells,0.4339,-0.00559459746761695,4,Great Ape
+Astrocytes,0.3521,-0.00259583701014484,4,Haplorhine
+Cerebellum neurons,0.2965,-0.00272465684011484,4,Haplorhine
+Cholinergic and monoaminergic neurons,0.7043,-0.000952034013615644,4,Haplorhine
+Choroid epithelial cells,0.117,0.00544768988202467,4,Haplorhine
+Dentate gyrus granule neurons,0.0147,-0.00487695411246458,4,Haplorhine
+Dentate gyrus radial glia-like cells,0.2791,-0.00227553178448243,4,Haplorhine
+Di- and mesencephalon excitatory neurons,0.0569,-0.00356834380191788,4,Haplorhine
+Di- and mesencephalon inhibitory neurons,0.2264,0.00213289543304543,4,Haplorhine
+Enteric glia,0.0029,0.00902072316941836,4,Haplorhine
+Enteric neurons,0.0174,-0.00647377695304474,4,Haplorhine
+Ependymal cells,0.0076,0.0161946436394785,4,Haplorhine
+Glutamatergic neuroblasts,0.0087,-0.00678862532223146,4,Haplorhine
+Hindbrain neurons,0.0131,-0.00546695974168822,4,Haplorhine
+Microglia,0.0109,0.012685684925401,4,Haplorhine
+Non-glutamatergic neuroblasts,0.0609,-0.00374186896071265,4,Haplorhine
+Olfactory ensheathing cells,0.7034,0.00115618210710934,4,Haplorhine
+Olfactory inhibitory neurons,0.1253,-0.00323926877783652,4,Haplorhine
+Oligodendrocyte precursor cells,0.4226,-0.00276675154682243,4,Haplorhine
+Oligodendrocytes,0.386,0.00259268184333656,4,Haplorhine
+Peptidergic neurons,0.1602,-0.00254562462048102,4,Haplorhine
+Pericytes,0.1155,0.00463818830604978,4,Haplorhine
+Peripheral sensory neurofilament neurons,0.6774,0.00098675018309729,4,Haplorhine
+Peripheral sensory non-peptidergic neurons,0.9551,-0.000177326545299734,4,Haplorhine
+Peripheral sensory peptidergic neurons,0.3242,-0.00219044792526397,4,Haplorhine
+Perivascular macrophages,0.0271,0.0111066460028979,4,Haplorhine
+Satellite glia,0.4622,-0.0015787751486799,4,Haplorhine
+Schwann cells,0.6254,0.00152491570262665,4,Haplorhine
+Spinal cord excitatory neurons,0.0421,-0.00420616611895614,4,Haplorhine
+Spinal cord inhibitory neurons,0.4449,-0.00152119046355185,4,Haplorhine
+Subcommissural organ hypendymal cells,0.5973,-0.0022622197129162,4,Haplorhine
+Subventricular zone radial glia-like cells,0.1302,-0.00295508759533158,4,Haplorhine
+Sympathetic cholinergic neurons,0.006,-0.00570026666087949,4,Haplorhine
+Sympathetic noradrenergic neurons,0.0455,-0.00419730680770043,4,Haplorhine
+Telencephalon inhibitory interneurons,0.2456,-0.00203484873302992,4,Haplorhine
+Telencephalon projecting excitatory neurons,0.0111,-0.00541088581849269,4,Haplorhine
+Telencephalon projecting inhibitory neurons,0.7086,0.000948645386599638,4,Haplorhine
+Vascular and leptomeningeal cells,0.032,0.00870114011801972,4,Haplorhine
+Vascular endothelial cells,0.6174,0.0017113838101911,4,Haplorhine
+Vascular smooth muscle cells,0.7106,0.0014025732638166,4,Haplorhine
+Astrocytes,0.3897,0.00365774757140787,4,Human
+Cerebellum neurons,0.5476,-0.00239885118096536,4,Human
+Cholinergic and monoaminergic neurons,0.8933,-0.000509931636535449,4,Human
+Choroid epithelial cells,0.349,0.00513480235529216,4,Human
+Dentate gyrus granule neurons,0.0779,-0.00513596299494643,4,Human
+Dentate gyrus radial glia-like cells,0.0822,0.00549018482738214,4,Human
+Di- and mesencephalon excitatory neurons,0.5141,-0.00178838859392183,4,Human
+Di- and mesencephalon inhibitory neurons,0.2542,-0.00292286084754371,4,Human
+Enteric glia,0.182,0.00559961305182185,4,Human
+Enteric neurons,0.5659,-0.00241018904801728,4,Human
+Ependymal cells,8e-04,0.0344453243880908,4,Human
+Glutamatergic neuroblasts,0.1273,-0.00513101227916225,4,Human
+Hindbrain neurons,0.9033,0.000405248263307295,4,Human
+Microglia,0.8727,0.00125590509830053,4,Human
+Non-glutamatergic neuroblasts,0.3464,-0.00285107317269917,4,Human
+Olfactory ensheathing cells,0.727,-0.00160871696937614,4,Human
+Olfactory inhibitory neurons,0.548,-0.00193516703373715,4,Human
+Oligodendrocyte precursor cells,0.1694,0.0072293438688238,4,Human
+Oligodendrocytes,0.7009,-0.00179379303789646,4,Human
+Peptidergic neurons,0.2455,-0.00294588983645045,4,Human
+Pericytes,0.3392,-0.00447648206337342,4,Human
+Peripheral sensory neurofilament neurons,0.2599,-0.00403072553684304,4,Human
+Peripheral sensory non-peptidergic neurons,0.0255,-0.011034203406123,4,Human
+Peripheral sensory peptidergic neurons,0.303,0.00338785311498192,4,Human
+Perivascular macrophages,0.0297,0.0165632910182663,4,Human
+Satellite glia,0.9358,-0.000261102903304557,4,Human
+Schwann cells,0.7965,-0.00125322452153004,4,Human
+Spinal cord excitatory neurons,0.4025,-0.00254312344257532,4,Human
+Spinal cord inhibitory neurons,0.1639,-0.00405664132671433,4,Human
+Subcommissural organ hypendymal cells,0.1686,0.00869831435279445,4,Human
+Subventricular zone radial glia-like cells,0.8164,0.000725467385607661,4,Human
+Sympathetic cholinergic neurons,0.0434,-0.0059530439735861,4,Human
+Sympathetic noradrenergic neurons,0.0666,-0.00575828966308568,4,Human
+Telencephalon inhibitory interneurons,0.6994,-0.00100830893505956,4,Human
+Telencephalon projecting excitatory neurons,0.0458,-0.00627573425421759,4,Human
+Telencephalon projecting inhibitory neurons,0.6888,0.00158841343728617,4,Human
+Vascular and leptomeningeal cells,0.5885,-0.00347528906165958,4,Human
+Vascular endothelial cells,0.1899,-0.00654764032192861,4,Human
+Vascular smooth muscle cells,0.2804,-0.00607586969372267,4,Human
