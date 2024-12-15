@@ -1,0 +1,1350 @@
+---
+title: "Identification of genes, cell types, and phenotypes under selective pressure actoss primate evolution"
+format:
+  html:
+    toc: true
+    toc-location: left
+    embed-resources: true
+editor: visual
+execute: 
+  echo: false
+  warning: false
+  cache: true
+---
+
+```{r}
+#| label: load-packages
+#| include: false
+
+library(ggplot2)
+library(ggtree)
+library(ghibli)
+library(TxDb.Hsapiens.UCSC.hg38.knownGene)
+library(patchwork)
+library(dplyr)
+library(data.table)
+library(cowplot)
+library(HPOExplorer)
+library(ggpubr)
+library(tidyr)
+library(readxl)
+library(grid)
+library(orthogene)
+```
+
+## Abstract
+
+Comparative genomics can help us better understand the role of the human genome in health and disease. Evolutionarily conserved genomic regions often underlie the molecular basis of important biological functions, and in mammals show strongest enrichment for disease risk variants relative to other genomic regions. Furthermore, genomic regions that have been under recent positive selection within the human lineage can yield insights into human-attributed traits and disorders. Given the myriad of  phenotypic differences between humans and our closest living relatives, non-human primates, quantifying selective pressures can help us better understand molecular drivers of primate species differences. We utilised a multiple sequence alignment of 27 primate genomes to detect selective pressures acting on \>19,000 genes at key speciation events in primate evolution. To address the challenge of interpreting these genome-wide selection signatures, we performed pathway enrichment analysis and a series of cell type-specific enrichment tests using single-cell RNA-seq-derived transcriptomic signatures of  \> 100 different cell types across multiple organ systems, including an anatomically detailed atlas of the central nervous system. To further disentangle the link between molecular evolution and human traits and disorders, we evaluated the enrichment of genes under selective pressure using data from the Human Phenotype Ontology, the Mammalian Phenotype Ontology, and genome-wide association studies (GWAS). Our study provides a  resource of genome-wide evolutionary pressures acting at key speciation events across primate evolution, and a systematic analysis of their associations with cell types, disease risk, and human phenotypes.
+
+## Manuscript figures 
+
+### Detecting selective pressures driving key speciation events in primate evolution
+
+```{r figure_1}
+#| **Figure 1: Phylogenetic tree of 30 mammals, including 27 primate species.** Phylogenetic tree showing the evolutionary relationships between the 30 mammalian species (including 27 primates) used in the  analysis. The branches represent lineages and the nodes represent the divergence of the lineages that we analysed in this study: Human, Homo-Pan (marked using human and chimpanzee), Great Apes (marked using human and orangutan), Haplorhini (marked using human and tarsier), Primates (marked using human and bushbaby). In bold are the species used to mark these nodes, e.g. human and chimpanzee to mark the Homo-Pan clade.
+
+human_colour = "#EAD890FF"
+homopan_colour = "#E48C2AFF"
+greatape_colour = "#CD4F38FF"
+haplorhini_colour = "#657060FF"
+primate_colour = "#3D4F7DFF"
+
+## A: Phylogenetic tree ## 
+
+tree <- read.tree(file="data/hg38.30way.nh.txt")
+# change tree tip label to common scientific names
+species_names <- read.csv("data/multiz_30way_scientific_common_names.csv", header=FALSE)
+tiplabel <- data.frame(species=tree[["tip.label"]])
+tiplabel_alt <- merge(tiplabel, species_names, by.x="species", by.y="V1")
+tree$tip.label <- tiplabel_alt$V2[match(tree$tip.label, tiplabel_alt$species)]
+
+tree_plot <- ggtree(tree, size=0.8, color="#06141FFF") + 
+  geom_tiplab(geom="text", offset=0.04, align=2, vjust=.5, size=5, 
+              colour="#742C14FF", aes(subset = node, fontface = ifelse(node %in% c(3,2,5,22,27), "bold", "plain"))) + 
+  geom_point2(aes(subset = c(node %in% c(3,41,39,35,34)), color = as.factor(node)), 
+              alpha=0.8, size=5)  + 
+  geom_cladelabel(node=3, colour="#06141FFF", label="Human", offset=0.06 , geom='label', fill='#EAD890FF', alpha=0.5, fontsize=7) + 
+  geom_cladelabel(node=41, colour="#06141FFF", label="Homo-Pan", offset=0.085, geom='label', fill='#E48C2AFF', alpha=0.5, fontsize=7) + 
+  geom_cladelabel(node=39, colour="#06141FFF", label="Great Apes", offset=0.13, geom='label', fill='#CD4F38FF', alpha=0.5, fontsize=7) + 
+  geom_cladelabel(node=35, colour="#06141FFF", label="Haplorhini", offset=0.155, geom='label', fill='#657060FF', alpha=0.5, fontsize=7) + 
+  geom_cladelabel(node=34, colour="#06141FFF", label="Primates", offset=0.185, geom='label', fill='#3D4F7DFF', alpha=0.5, fontsize=7) + 
+  scale_color_manual(values = c("3" = "#EAD890FF", "41" = "#E48C2AFF", "39" = "#CD4F38FF", "35" = "#657060FF", "34" = "#3D4F7DFF")) +
+  theme(legend.position = "none")
+
+plot(tree_plot)
+
+```
+
+```{r figure_2}
+#| fig-cap: "**Figure 2: Using three independent codon-substitution models to detect lineage-specific selective pressures in 27 primate species.** **a** Barplot showing the number of positively selected genes identified using the PAML branch model implemented in ETE3 (dN/dS > 1 & p < 0.05). **b** Barplot showing the number of negatively selected genes identified using the PAML branch model implemented in ETE3 (dN/dS < 1 & p < 0.05). **c** Barplot showing the number of positively selected genes identified using the PAML branch-site model implemented in ETE3 (p < 0.05). **d** Barplot showing the number of positively selected genes identified using HyPhy aBSREL (p < 0.05). **e** Scatterplot of the correlation between PAML branch-site p-values and HyPhy aBSREL p-values across genes tested in the Human lineage. Note, HyPhy aBSREL outputs a one-tailed p-value."
+#| column: body
+#| fig-height: 12.5
+#| fig-width: 20
+
+## No. of pos sel genes branch model ##
+
+# Load in PAML and hyphy res 
+branch_res <- read.csv("results/S1_PAML_branch_res_Multiz30wayPrimate.csv")
+branchsite_res <- read.csv("results/S2_PAML_branchsite_res_Multiz30wayPrimate.csv")
+hyphy_res <- read.csv("results/S3_HyPhy_aBSREL_res_Multiz30wayPrimate.csv")
+
+branch_res$branch <- gsub("Haplorhine", "Haplorhini", branch_res$branch)
+branchsite_res$branch <- gsub("Haplorhine", "Haplorhini", branchsite_res$branch)
+hyphy_res$branch <- gsub("Haplorhine", "Haplorhini", hyphy_res$branch)
+
+branch_res$branch <- factor(branch_res$branch, levels=c("Human", "Homo-Pan", "Great Ape", "Haplorhini", "Primate"))
+branchsite_res$branch <- factor(branchsite_res$branch, levels=c("Human", "Homo-Pan", "Great Ape", "Haplorhini", "Primate"))
+hyphy_res$branch <- factor(hyphy_res$branch, levels=c("Human", "Homo-Pan", "Great Ape", "Haplorhini", "Primate"))
+
+# 2a
+branch_pos_plot <- ggplot(branch_res[branch_res$p<0.05 & branch_res$omega>1,], aes(x=branch,fill=branch)) + 
+  geom_bar(stat="count", width=0.5) + 
+  theme_classic() + xlab("") + ylab("Number of genes") + 
+  geom_text(stat='count', aes(label=..count..), vjust=-1, size=4) + ylim(0,60) + 
+  scale_fill_ghibli_d("MononokeLight", direction = -1) + 
+  theme(legend.position = "none", axis.title.x = element_text(vjust=-1), 
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size=14),
+        axis.title.y = element_text(vjust=1), text=element_text(size=14),
+        plot.title = element_text(hjust = 0.5, size=14)) +
+  ggtitle("Positive selection \n(PAML branch model)")
+
+# 2b 
+branch_neg_plot <- ggplot(branch_res[branch_res$p<0.05 & branch_res$omega<1,], aes(x=branch,fill=branch)) + 
+  geom_bar(stat="count", width=0.5) + 
+  theme_classic() + xlab("") + ylab("Number of genes") + 
+  geom_text(stat='count', aes(label=..count..), vjust=-1, size=4) + 
+  scale_fill_ghibli_d("MononokeLight", direction = -1) + ylim(0,7000) + 
+  theme(legend.position = "none", axis.title.x = element_text(vjust=-1), 
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size=14),
+        axis.title.y = element_text(vjust=1), text=element_text(size=14),
+        plot.title = element_text(hjust = 0.5, size=14)) +
+  ggtitle("Negative selection \n(PAML branch model)")
+
+# 2c 
+branchsite_plot <- ggplot(branchsite_res[branchsite_res$p < 0.05, ], aes(x = branch, fill = branch)) + 
+  geom_bar(stat = "count", width = 0.5) + 
+  theme_classic() + xlab("") + ylab("Number of genes") + 
+  geom_text(stat = 'count', aes(label = ..count..), vjust = -1, size = 4) + ylim(0, 650) + 
+  scale_fill_ghibli_d("MononokeLight", direction = -1) + 
+  theme(legend.position = "none", axis.title.x = element_text(vjust = -1), 
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size=14),
+        axis.title.y = element_text(vjust = 1), text = element_text(size=14),
+        plot.title = element_text(hjust = 0.5, size=14)) +  # Adjusted ggtitle size
+  ggtitle("Positive selection \n(PAML branch-site model)")
+
+# 2d
+hyphy_plot <- ggplot(hyphy_res[hyphy_res$p < 0.05,], aes(x = branch, fill = branch)) + 
+  geom_bar(stat = "count", width = 0.5) + 
+  theme_classic() + xlab("") + ylab("Number of genes") + 
+  geom_text(stat = 'count', aes(label = ..count..), vjust = -1, size = 4) + ylim(0, 200) + 
+  scale_fill_ghibli_d("MononokeLight", direction = -1) + 
+  theme(legend.position = "none", axis.title.x = element_text(vjust = -1), 
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size=14),
+        axis.title.y = element_text(vjust = 1), text = element_text(size=14),
+        plot.title = element_text(hjust = 0.5, size=14)) +  # Adjusted ggtitle size
+  ggtitle("Positive selection \n(HyPhy aBSREL)")
+
+
+## 2e
+
+ete3_hyphy_cor <- merge(hyphy_res, branchsite_res, by=c("gene", "branch"))
+
+ete3_hyphy_cor <- ete3_hyphy_cor %>% 
+  dplyr::rename(
+    p_hyphy = p.x,
+    p_ete3 = p.y
+  )
+
+ete3_hyphy_cor$p_hyphy[ete3_hyphy_cor$p_hyphy==0] <- min(ete3_hyphy_cor$p_hyphy[ete3_hyphy_cor$p_hyphy != min(ete3_hyphy_cor$p_hyphy)])  
+ete3_hyphy_cor$p_ete3[ete3_hyphy_cor$p_ete3==0] <- min(ete3_hyphy_cor$p_ete3[ete3_hyphy_cor$p_ete3 != min(ete3_hyphy_cor$p_ete3)])  
+
+ete3_hyphy_cor_plot <- ggplot(ete3_hyphy_cor[ete3_hyphy_cor$branch=="Human" & ete3_hyphy_cor$p_hyphy<=0.5,], aes(x=p_ete3, y=p_hyphy)) + 
+  geom_point(size=1, colour=human_colour) + stat_cor(method="spearman", size=5) + xlab("ETE3 branch-site p-value") + 
+  ylab("HyPhy aBSREL p-value") + theme_classic() + ggtitle("Human") +
+  theme(text = element_text(size=15), plot.title = element_text(hjust=0.5, size=16),
+        axis.title.x = element_text(vjust = 14)) 
+
+# Figure 2 
+figure_2 <- (branch_pos_plot + plot_spacer() + branch_neg_plot + plot_spacer() + branchsite_plot + 
+               plot_layout(widths=c(1,0.01,1,0.01,1))) /
+  (plot_spacer() + hyphy_plot + plot_spacer() + ete3_hyphy_cor_plot + plot_spacer() + plot_layout(widths=c(0.5,1,0.01,1,0.5))) +
+  plot_annotation(tag_levels = 'a') & 
+  theme(plot.tag = element_text(size = 16, face = "bold"))
+
+plot(figure_2)
+
+
+```
+
+### Genes under positive selection are more tolerant to mutation and lead to more, viable phenotypes when knocked out
+
+```{r figure_3}
+#| fig-cap: "**Figure 3: Codon-substitution models may be differentially influenced by CDS length and GC content.** Boxplots showing the CDS length percentile and percentage of GC content in **a,b** genes under positive and negative selection as identified in the PAML branch model, **c,d** genes under positive selection and those not reaching significance in the PAML branch-site model **e,f** genes under positive selection and those not reaching significance in the HyPhy aBSREL branch-site model."
+#| column: body
+#| fig-height: 7
+#| fig-width: 14
+
+cds_gc <- read.csv("data/human_cds_len_gc_content.csv")
+
+# GC content, CDS length in pos vs neg sel genes 
+branch_cds_gc <- merge(branch_res, cds_gc, by="gene")
+branch_cds_gc$selection <- "Not significant"
+branch_cds_gc$selection[branch_cds_gc$omega > 1 & branch_cds_gc$p < 0.05] <- "Positive \n selection"
+branch_cds_gc$selection[branch_cds_gc$omega < 1 & branch_cds_gc$p < 0.05] <- "Negative \n selection"
+
+branch_cds_gc$selection <- factor(branch_cds_gc$selection, levels=c("Positive \n selection", "Negative \n selection"))
+
+branch_cds_gc$cds_percentile <- ecdf(branch_cds_gc$cds_length)(branch_cds_gc$cds_length)*100
+
+branch_cds <- ggplot(branch_cds_gc[branch_cds_gc$p<0.05 & branch_cds_gc$branch=="Human",], aes(x=selection, y=cds_percentile, fill=selection)) + 
+  geom_boxplot(width=0.3) + theme_classic() + xlab("") + ylab("CDS length") + theme_bw() + 
+  scale_fill_manual(values=c("#E8C4A2FF","#D8AF39FF")) + ggtitle("PAML branch model") + 
+  theme(legend.position="none", text = element_text(size = 14), 
+        plot.title = element_text(hjust=0.5, size=14)) + 
+  stat_compare_means(method="t.test", label="p.format", label.x=1.4, label.y = 93, size = 4, fontface = "bold") + 
+  facet_wrap(~branch, nrow=1) 
+
+branch_gc <- ggplot(branch_cds_gc[branch_cds_gc$p<0.05 & branch_cds_gc$branch=="Human",], aes(x=selection, y=percentage_gene_gc_content, fill=selection)) + 
+  geom_boxplot(width=0.3) + theme_classic() + xlab("") + ylab("GC content (%)") + 
+  scale_fill_manual(values=c("#DE7862FF","#E70B64FF")) + theme_bw() + ggtitle("PAML branch model") + 
+  theme(legend.position="none", text = element_text(size = 14), 
+        plot.title = element_text(hjust=0.5, size=14)) + 
+  stat_compare_means(method="t.test", label="p.format", label.x=1.4, label.y = 70, size = 4, fontface = "bold") + 
+  facet_wrap(~branch, nrow=1) 
+
+# GC content, CDS length in branch-site genes with p < 0.05 vs p > 0.05
+branchsite_cds_gc <- merge(branchsite_res, cds_gc, by="gene")
+branchsite_cds_gc$selection[branchsite_cds_gc$p < 0.05] <- "p < 0.05"
+branchsite_cds_gc$selection[branchsite_cds_gc$p > 0.05] <- "p > 0.05"
+
+branchsite_cds_gc$cds_percentile <- ecdf(branchsite_cds_gc$cds_length)(branchsite_cds_gc$cds_length)*100
+
+branchsite_cds <- ggplot(branchsite_cds_gc[branchsite_cds_gc$branch=="Human",], aes(x=selection, y=cds_percentile, fill=selection)) + 
+  geom_boxplot(width=0.3) + theme_classic() + xlab("") + ylab("CDS length") + theme_bw() + 
+  scale_fill_manual(values=c("#E8C4A2FF","#D8AF39FF")) + ggtitle("PAML branch-site model") + 
+  theme(legend.position="none", text = element_text(size = 14), 
+        plot.title = element_text(hjust=0.5, size=14)) + 
+  stat_compare_means(method="t.test", label="p.format", label.x=1.4, label.y = 93, size = 4, fontface = "bold") + 
+  facet_wrap(~branch, nrow=1) 
+
+branchsite_gc <- ggplot(branchsite_cds_gc[branchsite_cds_gc$branch=="Human",], aes(x=selection, y=percentage_gene_gc_content, fill=selection)) + 
+  geom_boxplot(width=0.3) + theme_classic() + xlab("") + ylab("GC content (%)") + 
+  scale_fill_manual(values=c("#DE7862FF","#E70B64FF")) + theme_bw() + ggtitle("PAML branch-site model") + 
+  theme(legend.position="none", text = element_text(size = 14), 
+        plot.title = element_text(hjust=0.5, size=14)) + 
+  stat_compare_means(method="t.test", label="p.format", label.x=1.4, label.y = 70, size = 4, fontface = "bold") + 
+  facet_wrap(~branch, nrow=1) 
+
+# GC content, CDS length in HyPhy aBSREL genes (p < 0.05 vs p > 0.05)
+hyphy_cds_gc <- merge(hyphy_res, cds_gc, by="gene")
+hyphy_cds_gc$selection[hyphy_cds_gc$p < 0.05] <- "p < 0.05"
+hyphy_cds_gc$selection[hyphy_cds_gc$p > 0.05] <- "p > 0.05"
+
+hyphy_cds_gc$cds_percentile <- ecdf(hyphy_cds_gc$cds_length)(hyphy_cds_gc$cds_length)*100
+
+hyphy_cds <- ggplot(hyphy_cds_gc[hyphy_cds_gc$branch=="Human",], aes(x=selection, y=cds_percentile, fill=selection)) + 
+  geom_boxplot(width=0.3) + theme_classic() + xlab("") + ylab("CDS length") + theme_bw() + 
+  scale_fill_manual(values=c("#E8C4A2FF","#D8AF39FF")) + ggtitle("HyPhy aBSREL") + 
+  theme(legend.position="none", text = element_text(size = 14), 
+        plot.title = element_text(hjust=0.5, size=14)) + 
+  stat_compare_means(method="t.test", label="p.format", label.x=1.4, label.y = 93, size = 4, fontface = "bold") + 
+  facet_wrap(~branch, nrow=1) 
+
+hyphy_gc <- ggplot(hyphy_cds_gc[hyphy_cds_gc$branch=="Human",], aes(x=selection, y=percentage_gene_gc_content, fill=selection)) + 
+  geom_boxplot(width=0.3) + theme_classic() + xlab("") + ylab("GC content (%)") + 
+  scale_fill_manual(values=c("#DE7862FF","#E70B64FF")) + theme_bw() + ggtitle("HyPhy aBSREL") + 
+  theme(legend.position="none", text = element_text(size = 14), 
+        plot.title = element_text(hjust=0.5, size=14)) + 
+  stat_compare_means(method="t.test", label="p.format", label.x=1.4, label.y = 70, size = 4, fontface = "bold") + 
+  facet_wrap(~branch, nrow=1) 
+
+figure_3 <- (branch_cds + branch_gc) / (branchsite_cds + branchsite_gc) / (hyphy_cds + hyphy_gc) + plot_layout(nrow = 3) 
+
+figure_3 <- figure_3 + plot_annotation(tag_levels = 'a') & theme(plot.tag = element_text(size = 14, face = "bold"))
+
+plot(figure_3)
+```
+
+```{r figure_4}
+#| fig-cap: "**Figure 4: Positively selected genes are associated with metrics of mutation tolerance.** Boxplot of phastCons score of genes **a** under positive selection (PAML branch model, dN/dS > 1 & p < 0.05) versus genes under negative selection (PAML branch model, ω < 1 & p < 0.05), **b** with PAML branch-site model p < 0.05 (positively selected) versus p > 0.05, **c** with HyPhy aBSREL p < 0.05 (positively selected) versus p > 0.05. Boxplot of pLI of genes **d** under positive selection (PAML branch model, ω > 1 & p < 0.05) versus genes under negative selection (PAML branch model, ω < 1 & p < 0.05), e with PAML branch-site model p < 0.05 (positively selected) versus p > 0.05, f with HyPhy aBSREL p < 0.05 (positively selected) versus p > 0.05. Barplot of percentage of genes g under positive selection (PAML branch model, ω > 1 & p < 0.05) versus genes under negative selection (PAML branch model, ω < 1 & p < 0.05), h with PAML branch-site model p < 0.05 (positively selected) versus p > 0.05, i with HyPhy aBSREL p < 0.05 (positively selected) versus p > 0.05, that result in a viable, sub-viable, or lethal phenotype when knocked out in mouse."
+#| column: body
+#| fig-height: 7
+#| fig-width: 14
+
+## get phastCons and pLI 
+
+# palette 
+orange_palette <- c("#FFF5EB", "#FEE6CE", "#FDD0A2", "#FDAE6B", "#FD8D3C", "#F16913", "#D94801", "#A63603", "#7F2704", "#660000")
+
+phastCons <- read.csv("data/phastCons.csv")
+
+# calculate percentiles 
+phastCons$percentile <- ecdf(phastCons$phast)(phastCons$phast)*100
+
+## get branch res for human lineage and merge with phastCons
+branch_human_phastCons <- merge(branch_res[branch_res$branch=="Human",], phastCons, by.x="gene", by.y="gene_symbol")
+
+## 4a
+phastCons_vs_branch <- ggplot(branch_human_phastCons[branch_human_phastCons$p<0.05,], aes(x=selection, y=percentile, fill=selection)) + 
+  geom_boxplot(width=0.3) + theme_light() + xlab("") + ylab("phastCons") + 
+  scale_fill_manual(values=c("#DE7862FF","#E75B64FF")) + ggtitle("PAML branch") + 
+  theme(legend.position="none", text = element_text(size = 14),
+        plot.title = element_text(size=14, hjust=0.5),
+        axis.text.x = element_blank(), 
+        axis.ticks.y = element_blank()) + 
+  stat_compare_means(method="t.test", label="p.format", label.x=1.45, size=4, label.y=97, fontface="bold") 
+
+
+#cor.test(branch_human_phastCons$omega[branch_human_phastCons$p<0.05], branch_human_phastCons$phast[branch_human_phastCons$p<0.05], method="spearman")
+
+# branch-site p vs phastCons 
+# branch site all p values and merge with phastCons
+branchsite_human <- branchsite_res[branchsite_res$branch=="Human",]
+branchsite_human_phastCons <- merge(branchsite_human, phastCons, by.x="gene", by.y="gene_symbol")
+# split by sig/non-sig 
+branchsite_human_phastCons$selection[branchsite_human_phastCons$p<0.05] <- "p < 0.05"
+branchsite_human_phastCons$selection[branchsite_human_phastCons$p>0.05] <- "p > 0.05"
+
+## 4b
+
+phastCons_vs_branchsite <- ggplot(branchsite_human_phastCons, aes(x=selection, y=percentile, fill=selection)) + 
+  geom_boxplot(width=0.3) + theme_light() + xlab("") + ylab("phastCons") + 
+  scale_fill_manual(values=c("#DE7862FF","#E75B64FF")) + ggtitle("PAML branch-site") + 
+  theme(legend.position="none", text = element_text(size = 14),
+        plot.title = element_text(size=14, hjust=0.5),
+        axis.text.x = element_blank(), 
+        axis.ticks.y = element_blank()) + 
+  stat_compare_means(method="t.test", label="p.format", label.x=1.45, size=4, label.y=97, fontface="bold") 
+
+# hyphy p vs phastCons 
+# branch site all p values and merge with phastCons
+hyphy_human <- hyphy_res[hyphy_res$branch=="Human",]
+hyphy_human_phastCons <- merge(hyphy_human, phastCons, by.x="gene", by.y="gene_symbol")
+# split by sig/non-sig 
+hyphy_human_phastCons$selection[hyphy_human_phastCons$p<0.05] <- "p < 0.05"
+hyphy_human_phastCons$selection[hyphy_human_phastCons$p>0.05] <- "p > 0.05"
+
+## 4c
+
+phastCons_vs_hyphy <- ggplot(hyphy_human_phastCons, aes(x=selection, y=percentile, fill=selection)) + 
+  geom_boxplot(width=0.3) + theme_light() + xlab("") + ylab("phastCons") + 
+  scale_fill_manual(values=c("#DE7862FF","#E75B64FF")) + ggtitle("HyPhy aBSREL") + 
+  theme(legend.position="none", text = element_text(size = 14),
+        plot.title = element_text(size=14, hjust=0.5),
+        axis.text.x = element_blank(), 
+        axis.ticks.y = element_blank()) + 
+  stat_compare_means(method="t.test", label="p.format", label.x=1.45, size=4, label.y=97, fontface="bold") 
+
+phastCons_plot <- phastCons_vs_branch + phastCons_vs_branchsite + phastCons_vs_hyphy + 
+  plot_annotation(tag_levels = 'a') & 
+  theme(plot.tag = element_text(size = 16, face = "bold"))
+
+# pLI 
+pLI <- read.delim("data/gnomad.v4.0.constraint_metrics.tsv")
+
+maf_transcripts <- read.csv("data/transcriptID_geneSymbol.csv")
+
+# get pLI for transcripts in MAF 
+maf_transcripts$transcript <- gsub("\\.\\d+", "", maf_transcripts$seq.name)
+pLI_maf_transcripts <- merge(pLI, maf_transcripts, by="transcript")
+pLI_maf_transcripts <- pLI_maf_transcripts[!is.na(pLI_maf_transcripts$lof.pLI), ]
+
+
+pLI_maf_transcripts$percentile <- ecdf(pLI_maf_transcripts$lof.pLI)(pLI_maf_transcripts$lof.pLI)*100
+
+# merge pLI data with branch model results
+branch_human_pLI <- merge(branch_res[branch_res$branch=="Human",], pLI_maf_transcripts, by="gene")
+
+## 4d
+
+pLI_vs_branch <- ggplot(branch_human_pLI[branch_human_pLI$p<0.05,], aes(x=selection, y=percentile, fill=selection)) + 
+  geom_boxplot(width=0.3) + theme_light() + xlab("") + ylab("pLI") + 
+  scale_fill_manual(values=c("#E8C4A2FF","#D8AF39FF")) +
+  theme(legend.position = "none", plot.title = element_text(size=14, hjust=0.5),
+        axis.text.x = element_blank(), 
+        axis.ticks.y = element_blank(),
+        text = element_text(size = 14)) + 
+  stat_compare_means(method="t.test", label="p.format", label.x=1.45, size=4, label.y=97, fontface="bold") 
+
+#cor.test(branch_human_pLI$omega[branch_human_pLI$p<0.05], branch_human_pLI$lof.pLI[branch_human_pLI$p<0.05], method="spearman")
+
+# branch-site p vs pLI 
+# branch site all p values and merge with pLI
+branchsite_human <- branchsite_res[branchsite_res$branch=="Human",]
+branchsite_human_pLI <- merge(branchsite_human, pLI_maf_transcripts, by.x="gene", by.y="gene_symbol")
+# split by sig/non-sig 
+branchsite_human_pLI$selection[branchsite_human_pLI$p<0.05] <- "p < 0.05"
+branchsite_human_pLI$selection[branchsite_human_pLI$p>0.05] <- "p > 0.05"
+
+## 4e
+
+pLI_vs_branchsite <- ggplot(branchsite_human_pLI, aes(x=selection, y=percentile, fill=selection)) + 
+  geom_boxplot(width=0.3) + theme_light() + xlab("") + ylab("pLI") + 
+  scale_fill_manual(values=c("#E8C4A2FF","#D8AF39FF")) + 
+  theme(legend.position = "none", plot.title = element_text(size=14, hjust=0.5),
+        axis.text.x = element_blank(), 
+        axis.ticks.y = element_blank(),
+        text = element_text(size = 14)) + 
+  stat_compare_means(method="t.test", label="p.format", label.x=1.45, size=4, label.y=97, fontface="bold") 
+
+# hyphy p vs pLI 
+hyphy_human <- hyphy_res[hyphy_res$branch=="Human",]
+hyphy_human_pLI <- merge(hyphy_human, pLI_maf_transcripts, by.x="gene", by.y="gene_symbol")
+# split by sig/non-sig 
+hyphy_human_pLI$selection[hyphy_human_pLI$p<0.05] <- "p < 0.05"
+hyphy_human_pLI$selection[hyphy_human_pLI$p>0.05] <- "p > 0.05"
+
+## 4f
+
+pLI_vs_hyphy <- ggplot(hyphy_human_pLI, aes(x=selection, y=percentile, fill=selection)) + 
+  geom_boxplot(width=0.3) + theme_light() + xlab("") + ylab("pLI") + 
+  scale_fill_manual(values=c("#E8C4A2FF","#D8AF39FF")) + 
+  theme(legend.position = "none", plot.title = element_text(size=14, hjust=0.5),
+        axis.text.x = element_blank(), 
+        axis.ticks.y = element_blank(),
+        text = element_text(size = 14)) + 
+  stat_compare_means(method="t.test", label="p.format", label.x=1.45, size=4, label.y=97, fontface="bold") 
+
+pLI_plot <- pLI_vs_branch + pLI_vs_branchsite + pLI_vs_hyphy + 
+  plot_annotation(tag_levels = list(c("d", "e", "f"))) & 
+  theme(plot.tag = element_text(size = 16, face = "bold"))
+
+
+## branch model vs lethality ## 
+
+viability <- read.csv("data/viability.csv")
+
+viability_dedup <- viability[!duplicated(viability$Gene.Symbol),]
+
+viability_annot <- orthogene::convert_orthologs(gene_df = viability_dedup,
+                                                gene_input = "Gene.Symbol", 
+                                                gene_output = "rownames", 
+                                                input_species = "mouse",
+                                                output_species = "human",
+                                                non121_strategy = "drop_both_species",
+                                                method = "homologene") 
+
+viability_annot$gene <- rownames(viability_annot)
+
+branch_res_viability <- dplyr::inner_join(branch_res, viability_annot, by = "gene")
+
+# Calculate proportions of viability phenotypes
+branch_viability_proportions <- branch_res_viability %>%
+  filter(p < 0.05) %>%
+  mutate(selection = case_when(
+    omega > 1 ~ "Positive selection",
+    omega < 1 ~ "Negative selection",
+    TRUE ~ NA_character_  
+  )) %>%
+  group_by(selection, Viability.Phenotype.HOMs.HEMIs) %>%
+  summarise(count = n()) %>%
+  mutate(proportion = count / sum(count))
+
+branch_viability_proportions$selection <- factor(branch_viability_proportions$selection, levels=c("Positive selection", "Negative selection"))
+
+# 4g
+branch <- ggplot(branch_viability_proportions,
+                 aes(x = selection, y = proportion*100, fill = Viability.Phenotype.HOMs.HEMIs)) +
+  geom_bar(stat = "identity", width = 0.5) +
+  labs(x = NULL, y = "Genes (%)", fill = "Knock-out phenotype") +
+  scale_fill_manual(values = c("viable" = "#44A57CFF", "subviable" = "#2C715FFF", "lethal" = "#274637FF")) +
+  theme_bw() +
+  theme(strip.text.x = element_text(size = 16),
+        axis.text.x = element_text(size=14),
+        text = element_text(size = 14)) +
+  geom_text(aes(label = paste0(round(proportion*100), "%")), color = "white", position = position_stack(vjust = 0.5))
+
+# calculate two-proportion z-test 
+A = sum(posSel_branch_gene_sets[["Human"]] %in% viability_annot$gene[viability_annot$Viability.Phenotype.HOMs.HEMIs %in% c("lethal", "subviable")])
+B = sum(negSel_gene_sets[["Human"]] %in% viability_annot$gene[viability_annot$Viability.Phenotype.HOMs.HEMIs %in% c("lethal", "subviable")])
+C = length(posSel_branch_gene_sets[["Human"]])
+D = length(negSel_gene_sets[["Human"]])
+
+# Perform Fisher's Exact Test
+prop.test(x = c(A,B), n = c(C,D))
+
+# Merge the two data frames based on the common gene column
+branchsite_res_viability <- dplyr::inner_join(branchsite_res, viability_annot, by = "gene")
+
+# branch-site res 
+branchsite_viability_proportions <- branchsite_res_viability %>%
+  mutate(selection = case_when(
+    p < 0.05 ~ "p < 0.05",
+    p > 0.05 ~ "p > 0.05",
+    TRUE ~ NA_character_  # Handle other cases (if any)
+  )) %>%
+  group_by(selection, Viability.Phenotype.HOMs.HEMIs) %>%
+  summarise(count = n()) %>%
+  mutate(proportion = count / sum(count))
+
+# 4h
+branchsite <- ggplot(branchsite_viability_proportions,
+                     aes(x = selection, y = proportion*100, fill = Viability.Phenotype.HOMs.HEMIs)) +
+  geom_bar(stat = "identity", width = 0.5) +
+  labs(x = NULL, y = "Genes (%)", fill = "Knock-out phenotype") +
+  scale_fill_manual(values = c("viable" = "#44A57CFF", "subviable" = "#2C715FFF", "lethal" = "#274637FF")) +
+  theme_bw()  +
+  theme(strip.text.x = element_text(size = 16),
+        axis.text.x = element_text(size=14),
+        text = element_text(size = 14)) +
+  geom_text(aes(label = paste0(round(proportion*100), "%")), color = "white", position = position_stack(vjust = 0.5))
+
+A = sum(posSel_branchsite_gene_sets[["Human"]] %in% viability_annot$gene[viability_annot$Viability.Phenotype.HOMs.HEMIs %in% c("lethal", "subviable")])
+B = sum(branchsite_res$gene[branchsite_res$branch=="Human" & branchsite_res$p>0.05] %in% viability_annot$gene[viability_annot$Viability.Phenotype.HOMs.HEMIs %in% c("lethal", "subviable")])
+C = length(posSel_branchsite_gene_sets[["Human"]])
+D = length(branchsite_res$gene[branchsite_res$branch=="Human" & branchsite_res$p>0.05])
+
+# Perform Fisher's Exact Test
+prop.test(x = c(A,B), n = c(C,D))
+
+
+# Merge the two data frames based on the common gene column
+hyphy_res_viability <- dplyr::inner_join(hyphy_res, viability_annot, by = "gene")
+
+# branch-site res 
+hyphy_viability_proportions <- hyphy_res_viability %>%
+  mutate(selection = case_when(
+    p < 0.05 ~ "p < 0.05",
+    p > 0.05 ~ "p > 0.05",
+    TRUE ~ NA_character_  # Handle other cases (if any)
+  )) %>%
+  group_by(selection, Viability.Phenotype.HOMs.HEMIs) %>%
+  summarise(count = n()) %>%
+  mutate(proportion = count / sum(count))
+
+
+# 4i
+hyphy <- ggplot(hyphy_viability_proportions,
+                aes(x = selection, y = proportion*100, fill = Viability.Phenotype.HOMs.HEMIs)) +
+  geom_bar(stat = "identity", width = 0.5) +
+  labs(x = NULL, y = "Genes (%)", fill = "Knock-out phenotype") +
+  scale_fill_manual(values = c("viable" = "#44A57CFF", "subviable" = "#2C715FFF", "lethal" = "#274637FF")) +
+  theme_bw() + 
+  theme(strip.text.x = element_text(size = 16),
+        axis.text.x = element_text(size=14),
+        text = element_text(size = 14)) +
+  geom_text(aes(label = paste0(round(proportion*100), "%")), color = "white", position = position_stack(vjust = 0.5))
+
+# Perform Fisher's Exact Test
+prop.test(x = c(A,B), n = c(C,D))
+
+
+lethality_plot <- branch + branchsite + hyphy +
+  plot_layout(guides = "collect") + 
+  plot_annotation(tag_levels = list(c("g", "h", "i"))) & 
+  theme(plot.tag = element_text(size = 16, face = "bold"), legend.position = "bottom")
+
+# Figure 4
+figure_4 <- phastCons_plot / pLI_plot / lethality_plot + 
+  plot_annotation(tag_levels = 'a') & 
+  theme(plot.tag = element_text(size = 16, face = "bold"))
+
+plot(figure_4)
+
+```
+
+### Positive selection in the human lineage is associated with ependymal cells in the brain
+
+```{r figure_5}
+#| fig-cap: "**Figure 5: Across 77 whole-body cell types, thyroid cells show the strongest association with positive selection in the human lineage.** **a** Dendrogram showing the clustering of 77 cell types from the human cell landscape46. The x-axis is ordered by the dendrogram. **b** Barplot presenting the linear regression coefficient of positively selected genes (PAML branch-site model, ω > 1 & p <  0.05) with cell type-specificity of expression. **c** Barplot presenting the linear regression coefficient of negatively selected genes (PAML branch model, ω < 1 & p < 0.05).  A linear regression model with 10,000 permutation tests was used. Cell types marked by an asterisk represent those that were significantly enriched after FDR correction (FDR < 0.05)."
+#| column: body
+#| fig-height: 28
+#| fig-width: 28
+
+## Cell type enrichments ## 
+
+hcl_posSel_res <- read.csv("results/hcl_permuco_branchsite_res.csv")
+
+hcl_posSel_res_df$branch <- factor(hcl_posSel_res_df$branch, levels=c("Human","Homo-Pan","Great Ape", "Haplorhine","Primate"))
+
+permuco_plot <- function(permucoRes, ctd, ctd_level, add_dendro = TRUE, axislab = TRUE) {
+  permucoRes$coefs[permucoRes$coefs < 0] = 0
+  permucoRes$q <- p.adjust(permucoRes$p, method = "BH")
+  ast_q = rep("", dim(permucoRes)[1])
+  ast_q[permucoRes$q < 0.05 & permucoRes$coefs > 0] = "*"
+  permucoRes$ast_q = ast_q  
+  permucoRes <- permucoRes[order(permucoRes$q, decreasing = FALSE),]
+  
+  ctdIN <- EWCE:::prep_dendro(ctdIN = ctd[[ctd_level]], expand = c(0, .66))
+  ct_order <- ctdIN$plotting$cell_ordering
+  permucoRes$celltype <- factor(permucoRes$celltype, levels = ct_order)
+  permucoRes$celltype <- gsub("_", " ", permucoRes$celltype)
+  
+  ylim_max = max(permucoRes$coefs) + 0.004
+  
+  if (axislab) {
+    main_plot <- ggplot(permucoRes, aes(x = celltype, y = coefs, fill = branch)) + 
+      geom_bar(stat = "identity", position = "identity") + theme_cowplot() + 
+      theme(text = element_text(size = 11), axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 11)) + ylim(0, ylim_max) + xlab("Cell type") + ylab("Coefficient") + geom_text(aes_string(label = "ast_q"), size = 7, vjust = 0.4) + facet_wrap(~branch, ncol = 1) + scale_fill_ghibli_d("MononokeLight", direction = -1) + 
+      theme(legend.position = "none") 
+  } else {
+    main_plot <- ggplot(permucoRes, aes(x = celltype, y = coefs, fill = branch)) + 
+      geom_bar(stat = "identity", position = "identity") + theme_cowplot() + 
+      theme(text = element_text(size = 11), axis.text.x = element_blank(), axis.ticks.x = element_blank()) + ylim(0, ylim_max) + xlab("") + ylab("Coefficient") + geom_text(aes_string(label = "ast_q"), size = 7, vjust = 0.4) + facet_wrap(~branch, ncol = 1) + scale_fill_ghibli_d("MononokeLight", direction = -1) + 
+      theme(legend.position = "none") 
+  }
+  
+  if (add_dendro) {
+    return(patchwork::wrap_plots(ctdIN$plotting$ggdendro_horizontal, main_plot, heights = c(.3,1), ncol = 1))
+  } else {
+    return(main_plot)
+  }
+}
+
+# 5a,b
+
+hcl_posSel_plot <- permuco_plot(hcl_posSel_res_df, ctd, 3, axislab = FALSE)
+
+# Negative selection
+
+hcl_negSel_res <- read.csv("results/hcl_permuco_branch_res.csv")
+
+hcl_negSel_res_df$branch <- factor(hcl_negSel_res_df$branch, levels=c("Human","Homo-Pan","Great Ape", "Haplorhine","Primate"))
+
+# 5c
+hcl_negSel_plot <- permuco_plot(hcl_negSel_res_df, ctd, 3, add_dendro = FALSE)
+
+# Figure 5
+
+figure_5 <-  hcl_posSel_plot / hcl_negSel_plot + plot_layout(nrow=3, heights = c(.3,1,1))
+
+figure_5 <- figure_5 + plot_annotation(tag_levels = 'a') & theme(plot.tag = element_text(size = 16, face = "bold"))
+
+plot(figure_5)
+
+```
+
+```{r figure_6}
+#| fig-cap: "**Figure 6: Investigation into brain cell types reveals significant enrichment of positive selection in humans in ependymal cells.** **a** Dendrogram showing the clustering of 39 cell types from the mouse nervous system47. The x-axis is ordered by the dendrogram. **b** Barplot presenting the linear regression coefficient of positively selected genes (PAML branch-site model, ω > 1 & p <  0.05) with cell type-specificity of expression. **c** Barplot presenting the linear regression coefficient of negatively selected genes (PAML branch model, ω < 1 & p < 0.05).  A linear regression model with 10,000 permutation tests was used. Cell types marked by an asterisk represent those that were significantly enriched after FDR correction."
+#| column: body
+#| fig-height: 22
+#| fig-width: 14
+
+## Cell type enrichments ## 
+
+# Positive selection
+
+zeisel_posSel_res_df <- read.csv("results/zeisel_permuco_branchsite_res.csv")
+
+zeisel_posSel_res_df$branch <- factor(zeisel_posSel_res_df$branch, levels=c("Human","Homo-Pan","Great Ape", "Haplorhine","Primate"))
+
+permuco_plot <- function(permucoRes, ctd, ctd_level, add_dendro = TRUE, axislab = TRUE) {
+  permucoRes$coefs[permucoRes$coefs < 0] = 0
+  permucoRes$q <- p.adjust(permucoRes$p, method = "BH")
+  ast_q = rep("", dim(permucoRes)[1])
+  ast_q[permucoRes$q < 0.05 & permucoRes$coefs > 0] = "*"
+  permucoRes$ast_q = ast_q  
+  permucoRes <- permucoRes[order(permucoRes$q, decreasing = FALSE),]
+  
+  ctdIN <- EWCE:::prep_dendro(ctdIN = ctd[[ctd_level]], expand = c(0, .66))
+  ct_order <- ctdIN$plotting$cell_ordering
+  permucoRes$celltype <- factor(permucoRes$celltype, levels = ct_order)
+  
+  ylim_max = max(permucoRes$coefs) + 0.015
+  
+  if (axislab) {
+    main_plot <- ggplot(permucoRes, aes(x = celltype, y = coefs, fill = branch)) + 
+      geom_bar(stat = "identity", position = "identity") + theme_cowplot() + 
+      theme(text = element_text(size = 14), axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 14)) + ylim(0, ylim_max) + xlab("Cell type") + ylab("Coefficient") + geom_text(aes_string(label = "ast_q"), size = 7, vjust = 0.4) + facet_wrap(~branch, ncol = 1) + scale_fill_ghibli_d("MononokeLight", direction = -1) + 
+      theme(legend.position = "none")
+  } else {
+    main_plot <- ggplot(permucoRes, aes(x = celltype, y = coefs, fill = branch)) + 
+      geom_bar(stat = "identity", position = "identity") + theme_cowplot() + 
+      theme(text = element_text(size = 14), axis.text.x = element_blank(), axis.ticks.x = element_blank()) + ylim(0, ylim_max) + xlab("") + ylab("Coefficient") + geom_text(aes_string(label = "ast_q"), size = 7, vjust = 0.4) + facet_wrap(~branch, ncol = 1) + scale_fill_ghibli_d("MononokeLight", direction = -1) + 
+      theme(legend.position = "none")
+  }
+  
+  if (add_dendro) {
+    return(patchwork::wrap_plots(ctdIN$plotting$ggdendro_horizontal, main_plot, heights = c(.3,1), ncol = 1))
+  } else {
+    return(main_plot)
+  }
+}
+
+
+zeisel_posSel_plot <- permuco_plot(zeisel_posSel_res_df, ctd, 4, axislab=FALSE)
+
+# Negative selection
+
+zeisel_negSel_res_df <- read.csv("results/zeisel_permuco_branch_res.csv")
+
+zeisel_negSel_res_df$branch <- factor(zeisel_negSel_res_df$branch, levels=c("Human","Homo-Pan","Great Ape", "Haplorhine","Primate"))
+
+zeisel_negSel_plot <- permuco_plot(zeisel_negSel_res_df, ctd, 4, add_dendro = FALSE)
+
+figure_6 <-  zeisel_posSel_plot / zeisel_negSel_plot + plot_layout(nrow=3, heights = c(.3,1,1)) 
+
+figure_6 <- figure_6 + plot_annotation(tag_levels = 'a') & theme(plot.tag = element_text(size = 16, face = "bold"))
+
+plot(figure_6)
+
+```
+
+### Signatures of positive selection in the genetic landscape of rare diseases
+
+```{r figure_7}
+#| fig-cap: "**Figure 7: Rare-disease-associated phenotypes are enriched for genes under positive selection across primate evolution.** Bar plot showing the top 10 enriched HPO, MPO, and OMIM terms, per branch tested, for genes under positive selection. Enrichments were determined using hypergeometric testing and p-values were adjusted using the FDR. Only genes under positive selection as identified using the PAML branch model (ω < 1 & p < 0.05) were significantly enriched after multiple testing correction."
+#| column: body
+#| fig-height: 12
+#| fig-width: 25
+
+branch_res_posSel <- branch_res[branch_res$omega>1 & branch_res$p<0.05,]
+branch_res_negSel <- branch_res[branch_res$omega<1 & branch_res$p<0.05,]
+branchsite_res_posSel <- branchsite_res[branchsite_res$p<0.05,]
+hyphy_res_posSel <- hyphy_res[hyphy_res$p<0.05,]
+
+posSel_branch_gene_sets <- list(
+  Human = branch_res_posSel$gene[branch_res_posSel$branch=="Human"],
+  `Homo-Pan` = branch_res_posSel$gene[branch_res_posSel$branch=="Homo-Pan"],
+  `Great Ape` = branch_res_posSel$gene[branch_res_posSel$branch=="Great Ape"],
+  Haplorhini = branch_res_posSel$gene[branch_res_posSel$branch=="Haplorhine"],
+  Primate = branch_res_posSel$gene[branch_res_posSel$branch=="Primate"]
+)
+
+negSel_gene_sets <- list(
+  Human = branch_res_negSel$gene[branch_res_negSel$branch=="Human"],
+  `Homo-Pan` = branch_res_negSel$gene[branch_res_negSel$branch=="Homo-Pan"],
+  `Great Ape` = branch_res_negSel$gene[branch_res_negSel$branch=="Great Ape"],
+  Haplorhini = branch_res_negSel$gene[branch_res_negSel$branch=="Haplorhine"],
+  Primate = branch_res_negSel$gene[branch_res_negSel$branch=="Primate"]
+)
+
+posSel_branchsite_gene_sets <- list(
+  Human = branchsite_res_posSel$gene[branchsite_res_posSel$branch=="Human"],
+  `Homo-Pan` = branchsite_res_posSel$gene[branchsite_res_posSel$branch=="Homo-Pan"],
+  `Great Ape` = branchsite_res_posSel$gene[branchsite_res_posSel$branch=="Great Ape"],
+  Haplorhini = branchsite_res_posSel$gene[branchsite_res_posSel$branch=="Haplorhine"],
+  Primate = branchsite_res_posSel$gene[branchsite_res_posSel$branch=="Primate"]
+)
+
+hyphy_gene_sets <- list(
+  Human = hyphy_res_posSel$gene[hyphy_res_posSel$branch=="Human"],
+  `Homo-Pan` = hyphy_res_posSel$gene[hyphy_res_posSel$branch=="Homo-Pan"],
+  `Great Ape` = hyphy_res_posSel$gene[hyphy_res_posSel$branch=="Great Ape"],
+  Haplorhini = hyphy_res_posSel$gene[hyphy_res_posSel$branch=="Haplorhine"],
+  Primate = hyphy_res_posSel$gene[hyphy_res_posSel$branch=="Primate"]
+)
+
+
+# Hypergeometric test function
+calc_pheno_overlap <- function(gene_sets, phenotype_gene_lists, background, model, selection, database) {
+  all_res_list <- list()
+  
+  for (gene_set_index in seq_along(gene_sets)) {
+    gene_set <- gene_sets[[gene_set_index]]
+    res_list <- list()  # Initialize a list for the current gene set
+    
+    for (i in 1:nrow(phenotype_gene_lists)) {
+      hpo_genes <- unlist(strsplit(phenotype_gene_lists$genes[i], ", "))
+      overlap <- sum(gene_set %in% hpo_genes)
+      
+      if (overlap > 0) {
+        group1_length <- length(gene_set)
+        group2_length <- length(hpo_genes)
+        total_length <- length(unique(background$gene))
+        
+        
+        p <- phyper(overlap - 1, group2_length, (total_length - group2_length), group1_length, lower.tail = FALSE)
+        
+        # Create a data frame for the result
+        res <- data.frame(
+          phenotype = phenotype_gene_lists$phenotype[i],
+          phyper_p = p,
+          gene_set = names(gene_sets)[gene_set_index],
+          gene_ratio = overlap/length(hpo_genes),
+          gene_count = overlap
+        )
+        
+        res_list[[length(res_list) + 1]] <- res
+      }
+    }
+    
+    # Combine results for the current gene set
+    combined_res <- do.call(rbind, res_list)
+    
+    # Adjust p-values using the Benjamini-Hochberg method
+    combined_res$p.adjust <- p.adjust(combined_res$phyper_p, method = "BH")
+    combined_res$model <- model
+    combined_res$selection <- selection
+    combined_res$database <- database
+    
+    all_res_list[[gene_set_index]] <- combined_res
+  }
+  
+  return(all_res_list)
+}
+
+
+# Overlap with hpo
+phenotype_gene_lists_hpo <- read.csv("data/HPO_phenotype_gene_lists.csv")
+phenotype_gene_lists_hpo <- phenotype_gene_lists_hpo %>%
+  mutate(gene_count = lengths(strsplit(genes, ",")))
+phenotype_gene_lists_hpo_filt <- phenotype_gene_lists_hpo %>%
+  filter(gene_count >= 5 & gene_count <= 500)
+
+posSel_branch_hpo_overlap <- calc_pheno_overlap(posSel_branch_gene_sets, phenotype_gene_lists_hpo_filt, branch_res, "PAML branch model", "Positive selection", "hpo")
+posSel_branch_hpo_overlap <- do.call(rbind, posSel_branch_hpo_overlap)
+posSel_branch_hpo_overlap <- posSel_branch_hpo_overlap[order(posSel_branch_hpo_overlap$p.adjust),]
+
+# posSel branch-site
+posSel_branchSite_hpo_overlap <- calc_pheno_overlap(posSel_branchsite_gene_sets, phenotype_gene_lists_hpo_filt, branchsite_res, "PAML branch-site model", "Positive selection", "hpo")
+posSel_branchSite_hpo_overlap <- do.call(rbind, posSel_branchSite_hpo_overlap)
+posSel_branchSite_hpo_overlap <- posSel_branchSite_hpo_overlap[order(posSel_branchSite_hpo_overlap$p.adjust),]
+
+# negSel
+negSel_hpo_overlap <- calc_pheno_overlap(negSel_gene_sets, phenotype_gene_lists_hpo_filt, branch_res, "PAML branch model", "Negative selection", "hpo")
+negSel_hpo_overlap <- do.call(rbind, negSel_hpo_overlap)
+negSel_hpo_overlap <- negSel_hpo_overlap[order(negSel_hpo_overlap$p.adjust),]
+
+# hyphy 
+
+# Overlap with MPO 
+phenotype_gene_lists_mpo <- read.csv("data/MPO_phenotype_gene_lists.csv")
+phenotype_gene_lists_mpo <- phenotype_gene_lists_mpo %>%
+  mutate(gene_count = lengths(strsplit(genes, ",")))
+phenotype_gene_lists_mpo_filt <- phenotype_gene_lists_mpo %>%
+  filter(gene_count >= 5 & gene_count <= 500)
+
+posSel_branch_mpo_overlap <- calc_pheno_overlap(posSel_branchsite_gene_sets, phenotype_gene_lists_mpo_filt, branch_res, "PAML branch model", "Positive selection", "MPO")
+posSel_branch_mpo_overlap <- do.call(rbind, posSel_branch_mpo_overlap)
+posSel_branch_mpo_overlap <- posSel_branch_mpo_overlap[order(posSel_branch_mpo_overlap$p.adjust),]
+
+# posSel branch-site
+posSel_branchSite_mpo_overlap <- calc_pheno_overlap(posSel_branchsite_gene_sets, phenotype_gene_lists_mpo_filt, branchsite_res, "PAML branch-site model", "Positive selection", "MPO")
+posSel_branchSite_mpo_overlap <- do.call(rbind, posSel_branchSite_mpo_overlap)
+posSel_branchSite_mpo_overlap <- posSel_branchSite_mpo_overlap[order(posSel_branchSite_mpo_overlap$p.adjust),]
+
+# negSel
+negSel_mpo_overlap <- calc_pheno_overlap(negSel_gene_sets, phenotype_gene_lists_mpo_filt, branch_res, "PAML branch model", "Negative selection", "MPO")
+negSel_mpo_overlap <- do.call(rbind, negSel_mpo_overlap)
+negSel_mpo_overlap <- negSel_mpo_overlap[order(negSel_mpo_overlap$p.adjust),]
+
+## F: MPO neg sel branch model - human ##
+negSel_mpo_overlap_top10 <- negSel_mpo_overlap %>%
+  arrange(p.adjust) %>%
+  group_by(gene_set) %>% slice(1:10)
+
+# Overlap with OMIM
+omim <- read.delim("~/Downloads/OMIM_gene_lists.txt", header=FALSE, comment.char="#")
+omim_gene_lists <- omim[,c(1,2)]
+names(omim_gene_lists) <- c("phenotype", "genes")
+omim_gene_lists <- omim_gene_lists %>%
+  mutate(gene_count = lengths(strsplit(genes, ",")))
+
+# Subset to keep only the phenotypes with at least ten genes
+omim_gene_lists_filt <- omim_gene_lists %>%
+  filter(gene_count >= 5 & gene_count <= 500)
+
+# branch model omim overlap
+posSel_branch_omim_overlap <- calc_pheno_overlap(posSel_branch_gene_sets, omim_gene_lists_filt, branch_res, "PAML branch model", "Positive selection", "OMIM")
+posSel_branch_omim_overlap <- do.call(rbind, posSel_branch_omim_overlap)
+posSel_branch_omim_overlap <- posSel_branch_omim_overlap[order(posSel_branch_omim_overlap$p.adjust),]
+# branch-site model omim overlap
+posSel_branchSite_omim_overlap <- calc_pheno_overlap(posSel_branchsite_gene_sets, omim_gene_lists_filt, branchsite_res, "PAML branch-site model", "Positive selection", "OMIM")
+posSel_branchSite_omim_overlap <- do.call(rbind, posSel_branchSite_omim_overlap)
+posSel_branchSite_omim_overlap <- posSel_branchSite_omim_overlap[order(posSel_branchSite_omim_overlap$p.adjust),]
+# neg sel omim overlap
+negSel_omim_overlap <- calc_pheno_overlap(negSel_gene_sets, omim_gene_lists_filt, branch_res, "PAML branch model", "Negative selection", "OMIM")
+negSel_omim_overlap <- do.call(rbind, negSel_omim_overlap)
+negSel_omim_overlap <- negSel_omim_overlap[order(negSel_omim_overlap$p.adjust),]
+# hyphy omim overlap
+hyphy_gene_sets <- list(
+  hyphy_human = hyphy_res_posSel$gene[hyphy_res_posSel$branch=="Human"],
+  hyphy_homo_pan = hyphy_res_posSel$gene[hyphy_res_posSel$branch=="Homo-Pan"],
+  hyphy_great_ape = hyphy_res_posSel$gene[hyphy_res_posSel$branch=="Great Ape"],
+  hyphy_haplorhine = hyphy_res_posSel$gene[hyphy_res_posSel$branch=="Haplorhine"],
+  hyphy_primate = hyphy_res_posSel$gene[hyphy_res_posSel$branch=="Primate"]
+)
+
+hyphy_omim_overlap <- calc_pheno_overlap(hyphy_gene_sets, omim_gene_lists_filt, branch_res, "HyPhy aBSREL", "Positive selection", "OMIM")
+hyphy_omim_overlap <- do.call(rbind, hyphy_omim_overlap)
+hyphy_omim_overlap <- hyphy_omim_overlap[order(hyphy_omim_overlap$p.adjust),]
+
+# Run hypergeometric test using genes under selective pressure and gene lists associated with hpo phenotypes 
+all_pheno_overlap <- rbind(posSel_branch_hpo_overlap,
+                           posSel_branchSite_hpo_overlap, 
+                           hyphy_hpo_overlap,
+                           negSel_hpo_overlap,
+                           posSel_branch_mpo_overlap, 
+                           posSel_branchSite_mpo_overlap,
+                           hyphy_mpo_overlap,
+                           negSel_mpo_overlap, 
+                           posSel_branch_omim_overlap,
+                           posSel_branchSite_omim_overlap, 
+                           negSel_omim_overlap, 
+                           hyphy_omim_overlap
+)
+
+all_pheno_overlap$database <- str_to_upper(all_pheno_overlap$database)
+
+all_pheno_overlap$gene_set <- factor(all_pheno_overlap$gene_set, levels=c("Human", "Homo-Pan", "Great Ape", "Haplorhini", "Primate"))
+
+posSel_overlap_top5 <- all_pheno_overlap %>%
+  filter(selection == "Positive selection") %>%
+  group_by(gene_set, database) %>%
+  filter(p.adjust < 0.05) %>%
+  slice_min(order_by = p.adjust, n = 5)
+
+posSel_overlap_top5 <- all_pheno_overlap %>%
+  filter(selection == "Positive selection") %>%
+  inner_join(posSel_overlap_top5, by = "phenotype")
+
+
+posSel_overlap_top5$phenotype_clean <- sub(",.*$", "", posSel_overlap_top5$phenotype)
+posSel_overlap_top5$phenotype_clean <- sub("\\{(.*?)\\}", "\\1", posSel_overlap_top5$phenotype_clean)
+posSel_overlap_top5$phenotype_clean <- sub("\\?", "", posSel_overlap_top5$phenotype_clean)
+posSel_overlap_top5$phenotype_clean <- gsub("[0-9]", "", posSel_overlap_top5$phenotype_clean)
+
+
+ggplot(posSel_overlap_top5, 
+       aes(x = -log10(p.adjust.x), y = phenotype_clean, fill = gene_set.x)) + 
+  geom_bar(stat="identity") + 
+  scale_y_discrete() + 
+  DOSE::theme_dose()  + 
+  xlab("-log10(FDR)") + ylab("Ontology term") + 
+  scale_size(range = c(3,7)) + 
+  guides(size = "none") + guides(fill = "none") + 
+  theme(axis.text.x = element_text(vjust = 1, size = 14), 
+        plot.title = element_text(hjust = 0.5, size = 1),
+        text = element_text(size = 14)) + 
+  facet_grid(database.x ~ gene_set.x, scales = "free_y") + force_panelsizes(rows = c(0.45,0.45,1)) + 
+  ggtitle("positive selection")  + force_panelsizes(rows = c(0.45,0.45,1)) +
+  scale_fill_manual(values = c("#F5EDC9FF", "#F2C695FF", "#E7A79BFF", "#B3B8B1FF", "#9FA7BEFF")) + 
+  geom_vline(xintercept = -log10(0.05), linetype = "dashed", color = "slategrey")
+
+
+plot(figure_5)
+
+```
+
+### Genes under positive selection in the human lineage are enriched for anxiety risk variants
+
+```{r figure_8}
+#| fig-cap: "**Figure 8: Genes under positive selection in the human lineage are enriched for anxiety risk variants.**  MAGMA gene set analysis 88 using genes under positive (PAML branch-site model, p < 0.05) and negative selection (PAML branch model, ω < 1 & p <  0.05) with GWAS for: Alzheimer’s disease, amyotrophic lateral sclerosis, anxiety, attention deficit hyperactivity disorder, ASD, bipolar disorder, focal epilepsy, major depressive disorder, multiple sclerosis, Parkinson’s disease, and schizophrenia. The grey dashed line is at p <  0.05, significant associations after FDR are marked by an asterisk."
+#| column: body
+#| fig-height: 20
+#| fig-width: 35
+
+# MAGMA 
+magma_res <- read.csv("results/S9_MAGMA_geneset_analysis_res.csv")
+
+magma_res$branch <- factor(magma_res$branch, levels=c("Humans","Homo-Pan","Great Apes", "Haplorhini","Primates"))
+
+ast_q <- rep("", dim(magma_res)[1])
+ast_q[magma_res$p_adjusted < 0.05] <- "*"
+magma_res$ast_q <- ast_q  
+
+row1 <- c("AD", "ADHD", "ALS", "Anxiety", "ASD", "Bipolar disorder")
+row2 <- c("Focal epilepsy", "Macular degeneration", "MDD", "MS", "PD", "Schizophrenia")
+
+magma_res1 <- magma_res[magma_res$group %in% row1,]
+magma_res1$branch <- factor(magma_res1$branch, levels=c("Human", "Homo-Pan", "Great Ape", "Haplorhini", "Primate"))
+
+magma_res2 <- magma_res[magma_res$group %in% row2,]
+magma_res2$branch <- factor(magma_res2$branch, levels=c("Human", "Homo-Pan", "Great Ape", "Haplorhini", "Primate"))
+
+
+p1 <- ggplot(magma_res1, aes(x = factor(branch, levels = rev(levels(branch))), y = -log10(P), fill = branch)) +
+  geom_bar(stat = "identity") +
+  scale_fill_ghibli_d("MononokeLight", direction = -1) +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "slategrey") +
+  facet_grid(selection ~ group) + geom_text(aes_string(label = "ast_q"), size = 8, hjust = -0.05, vjust=0.75) + 
+  coord_flip() + scale_x_discrete(limits = rev(levels(magma_res$branch))) + ylim(0,3) + 
+  theme_bw() + theme(plot.title = element_text(hjust=0.5, size=14), 
+                     text = element_text(size=14), 
+                     legend.position = "none",
+                     axis.title.x = element_blank(), axis.ticks.x = element_blank(), axis.text.x = element_blank()) + 
+  labs(x = "", y = "-log10(FDR)", title = "MAGMA gene set analysis using brain phenotype GWAS")
+
+p2 <- ggplot(magma_res2, aes(x = factor(branch, levels = rev(levels(branch))), y = -log10(P), fill = branch)) +
+  geom_bar(stat = "identity") +
+  scale_fill_ghibli_d("MononokeLight", direction = -1) +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "slategrey") +
+  facet_grid(selection ~ group) + geom_text(aes_string(label = "ast_q"), size = 8, hjust = -0.05, vjust=0.75) + 
+  coord_flip() + scale_x_discrete(limits = rev(levels(magma_res$branch))) + ylim(0,3) + 
+  theme_bw() + theme(text = element_text(size=14), legend.position = "none") + 
+  labs(x = "", y = "-log10(FDR)")
+
+figure_8 <- p1 / p2
+
+plot(figure_8)
+
+```
+
+## Supplementary figures
+
+```{r supplementary_figure_1}
+#| fig-cap: "**Supplementary Figure 1.** Correlation between **a** dN/dS for the human lineage calculated in this study and in Dumas et al. (2021), **b** PAML branch-site p-value for Great Apes calculated in this study and in Tajeda-Martinez et al. (2022)."
+#| fig-height: 8
+#| fig-width: 8
+# overlap with existing data 
+
+genevo <- fread("~/Downloads/genevo-raw-data.csv")
+ 
+pattern <- c("HS.OmegaHuguet")
+
+matching_columns <- c("Gene", grep(paste(pattern, collapse = "|"), names(genevo), value = TRUE))
+
+# Subset the data.table based on matching columns
+genevo_omega <- genevo[, ..matching_columns, with = FALSE]
+
+human_omega_cor <- merge(genevo_omega, branch_res[branch_res$branch=="Human",], by.x="Gene", by.y="gene")
+
+human_omega_cor_plot <- ggplot(human_omega_cor, aes(x=omega, y=highQuality.AN.HS.OmegaHuguet)) + geom_point(size=1, colour=human_colour) + stat_cor(method="spearman") + xlab("dN/dS (Murphy et al. 2024)") + ylab("dN/dS (Dumas et al 2021)") + theme_classic() + xlim(0,8) + theme(text = element_text(size=16))
+
+
+# Tejada-Martinez et al 2022
+greatape_bs <- read_excel("~/Downloads/msab369_supplementary_data/Supplementary_table_S1.xlsx", 
+                          sheet = "st7", skip = 4)
+
+greatape_bs_cor <- merge(greatape_bs, branchsite_res[branchsite_res$branch=="Great Ape",], by.x="GENE", by.y="gene")
+
+greatape_bs_cor_plot <- ggplot(greatape_bs_cor, aes(x=p, y=pvalue)) + 
+    geom_point(size=1, colour=greatape_colour) + stat_cor(method="pearson") + xlab("Branch-site p-value (Murphy et al. 2024)") + ylab("Branch-site p-value (Tejada-Martinez et al 2022)")  + theme_classic() + theme(text = element_text(size=16))
+
+supp_figure1 <- human_omega_cor_plot + greatape_bs_cor_plot
+
+supp_figure1 <- supp_figure1 + plot_annotation(tag_levels = 'a') & theme(plot.tag = element_text(size = 16, face = "bold"))
+
+plot(supp_figure1)
+```
+
+```{r supplementary_figure_2}
+#| fig-cap: "**Supplementary Figure 2.** Correlation between PAML branch-site p-value and HyPhy aBSREL p-values calculated in this study for **a** Homo-Pan, **b** Great Apes, **c** Haplorhini, and **d** Primates."
+#| fig-height: 12
+#| fig-width: 12
+# Correlating ETE3 and HyPhy branch-site p-values 
+
+ete3_hyphy_cor_homopan <- ggplot(ete3_hyphy_cor[ete3_hyphy_cor$branch=="Homo-Pan" & ete3_hyphy_cor$p_hyphy<=0.5,], aes(x=p_ete3, y=p_hyphy)) + 
+  geom_point(size=1, colour=homopan_colour) + stat_cor(method="spearman", size=5) + xlab("ETE3 branch-site p-value") + 
+  ylab("HyPhy aBSREL p-value") + theme_classic() + 
+  theme(text = element_text(size=18))
+
+ete3_hyphy_cor_greatape <-ggplot(ete3_hyphy_cor[ete3_hyphy_cor$branch=="Great Ape" & ete3_hyphy_cor$p_hyphy<=0.5,], aes(x=p_ete3, y=p_hyphy)) + 
+  geom_point(size=1, colour=greatape_colour) + stat_cor(method="spearman", size=5) + xlab("ETE3 branch-site p-value") + 
+  ylab("HyPhy aBSREL p-value") + theme_classic() + 
+  theme(text = element_text(size=18))
+
+ete3_hyphy_cor_haplorhini <-ggplot(ete3_hyphy_cor[ete3_hyphy_cor$branch=="Haplorhine" & ete3_hyphy_cor$p_hyphy<=0.5,], aes(x=p_ete3, y=p_hyphy)) + 
+  geom_point(size=1, colour=haplorhini_colour) + stat_cor(method="spearman", size=5) + xlab("ETE3 branch-site p-value") + 
+  ylab("HyPhy aBSREL p-value") + theme_classic() + 
+  theme(text = element_text(size=18))
+
+ete3_hyphy_cor_primate <- ggplot(ete3_hyphy_cor[ete3_hyphy_cor$branch=="Primate" & ete3_hyphy_cor$p_hyphy<=0.5,], aes(x=p_ete3, y=p_hyphy)) + 
+  geom_point(size=1, colour=primate_colour) + stat_cor(method="spearman", size=5) + xlab("ETE3 branch-site p-value") + 
+  ylab("HyPhy aBSREL p-value") + theme_classic() + 
+  theme(text = element_text(size=18))
+
+
+supp_figure2 <- ete3_hyphy_cor_homopan + ete3_hyphy_cor_greatape + ete3_hyphy_cor_haplorhini + ete3_hyphy_cor_primate
+
+supp_figure2 <- supp_figure2 + plot_annotation(tag_levels = 'a') & theme(plot.tag = element_text(size = 16, face = "bold"))
+
+plot(supp_figure2)
+```
+
+```{r supplementary_figure_3}
+  #| fig-cap: "**Supplementary Figure 3.** Correlation between selective pressure metrics and genomic features. Boxplots of **a** coding sequence (CDS) length distribution and **b** GC content (%) in genes under positive selection versus genes under negative selection (PAML branch model, dN/dS > 1 & p < 0.05, dN/dS < 1 & p < 0.05, respectively). Boxplots of **c** CDS length distribution and **d** GC content in genes with PAML branch-site p < 0.05 versus p > 0.05. Boxplots of **e** CDS length distribution and **f** GC content in genes with HyPhy aBSREL p < 0.05 versus p > 0.05."
+#| fig-height: 26
+#| fig-width: 18
+  
+# Read in CDS length and GC content info 
+cds_gc <- read.csv("/Volumes/cm1118/home/EvolutionOfCelltypes/data/human_cds_len_gc_content.csv")
+  
+  # GC content, CDS length in pos vs neg sel genes 
+  branch_cds_gc <- merge(branch_res, cds_gc, by="gene")
+  branch_cds_gc$selection <- "Not significant"
+  branch_cds_gc$selection[branch_cds_gc$omega > 1 & branch_cds_gc$p < 0.05] <- "Positive selection"
+  branch_cds_gc$selection[branch_cds_gc$omega < 1 & branch_cds_gc$p < 0.05] <- "Negative selection"
+  
+  branch_cds_gc$cds_percentile <- ecdf(branch_cds_gc$cds_length)(branch_cds_gc$cds_length)*100
+  
+  branch_cds <- ggplot(branch_cds_gc[branch_cds_gc$p<0.05,], aes(x=selection, y=cds_percentile, fill=selection)) + 
+    geom_boxplot(width=0.3) + theme_classic() + xlab("") + ylab("CDS length") + theme_bw() + 
+    scale_fill_manual(values=c("#E8C4A2FF","#D8AF39FF")) + ggtitle("PAML branch model") + 
+    theme(legend.position="none", text = element_text(size = 16), 
+          plot.title = element_text(hjust=0.5, size=16, face="bold")) + 
+    stat_compare_means(method="t.test", label="p.format", label.x=1.3) + 
+    facet_wrap(~branch, nrow=1) 
+  
+  branch_gc <- ggplot(branch_cds_gc[branch_cds_gc$p<0.05,], aes(x=selection, y=percentage_gene_gc_content, fill=selection)) + 
+    geom_boxplot(width=0.3) + theme_classic() + xlab("") + ylab("GC content (%)") + 
+    scale_fill_manual(values=c("#DE7862FF","#E75B64FF")) + theme_bw() + 
+    theme(legend.position="none", text = element_text(size = 16)) + 
+    stat_compare_means(method="t.test", label="p.format", label.x=1.3) + 
+    facet_wrap(~branch, nrow=1) 
+  
+  # GC content, CDS length in branch-site genes with p < 0.05 vs p > 0.05
+  branchsite_cds_gc <- merge(branchsite_res, cds_gc, by="gene")
+  branchsite_cds_gc$selection[branchsite_cds_gc$p < 0.05] <- "p < 0.05"
+  branchsite_cds_gc$selection[branchsite_cds_gc$p > 0.05] <- "p > 0.05"
+  
+  branchsite_cds_gc$cds_percentile <- ecdf(branchsite_cds_gc$cds_length)(branchsite_cds_gc$cds_length)*100
+  
+  branchsite_cds <- ggplot(branchsite_cds_gc, aes(x=selection, y=cds_percentile, fill=selection)) + 
+    geom_boxplot(width=0.3) + theme_classic() + xlab("") + ylab("CDS length") + theme_bw() + 
+    scale_fill_manual(values=c("#E8C4A2FF","#D8AF39FF")) + ggtitle("PAML branch-site model") + 
+    theme(legend.position="none", text = element_text(size = 16), 
+          plot.title = element_text(hjust=0.5, size=16, face="bold")) + 
+    stat_compare_means(method="t.test", label="p.format", label.x=1.3) + 
+    facet_wrap(~branch, nrow=1) 
+  
+  branchsite_gc <- ggplot(branchsite_cds_gc, aes(x=selection, y=percentage_gene_gc_content, fill=selection)) + 
+    geom_boxplot(width=0.3) + theme_classic() + xlab("PAML branch-site model") + ylab("GC content (%)") + 
+    scale_fill_manual(values=c("#DE7862FF","#E75B64FF")) + theme_bw() + 
+    theme(legend.position="none", text = element_text(size = 16)) + 
+    stat_compare_means(method="t.test", label="p.format", label.x=1.3) + 
+    facet_wrap(~branch, nrow=1) 
+  
+  # GC content, CDS length in HyPhy aBSREL genes (p < 0.05 vs p > 0.05)
+  hyphy_cds_gc <- merge(hyphy_res, cds_gc, by="gene")
+  hyphy_cds_gc$selection[hyphy_cds_gc$p < 0.05] <- "p < 0.05"
+  hyphy_cds_gc$selection[hyphy_cds_gc$p > 0.05] <- "p > 0.05"
+  
+  hyphy_cds_gc$cds_percentile <- ecdf(hyphy_cds_gc$cds_length)(hyphy_cds_gc$cds_length)*100
+  
+  hyphy_cds <- ggplot(hyphy_cds_gc, aes(x=selection, y=cds_percentile, fill=selection)) + 
+    geom_boxplot(width=0.3) + theme_classic() + xlab("") + ylab("CDS length") + theme_bw() + 
+    scale_fill_manual(values=c("#E8C4A2FF","#D8AF39FF")) + ggtitle("HyPhy aBSREL") + 
+    theme(legend.position="none", text = element_text(size = 16), 
+          plot.title = element_text(hjust=0.5, size=16, face="bold")) + 
+    stat_compare_means(method="t.test", label="p.format", label.x=1.3) + 
+    facet_wrap(~branch, nrow=1) 
+  
+  hyphy_gc <- ggplot(hyphy_cds_gc, aes(x=selection, y=percentage_gene_gc_content, fill=selection)) + 
+    geom_boxplot(width=0.3) + theme_classic() + xlab("") + ylab("GC content (%)") + 
+    scale_fill_manual(values=c("#DE7862FF","#E75B64FF")) + theme_bw() + 
+    theme(legend.position="none", text = element_text(size = 16)) + 
+    stat_compare_means(method="t.test", label="p.format", label.x=1.3) + 
+    facet_wrap(~branch, nrow=1) 
+  
+  supp_figure3 <- branch_cds + branch_gc + branchsite_cds + branchsite_gc + hyphy_cds + hyphy_gc + plot_layout(nrow = 6) 
+  
+  supp_figure3 <- supp_figure3 + plot_annotation(tag_levels = 'a') & theme(plot.tag = element_text(size = 16, face = "bold"))
+  
+  plot(supp_figure3)
+
+```
+
+```{r supplementary_figure_4}
+#| fig-cap: "**Supplementary Figure 4. Negatively selected genes are enriched in rare disease associated phenotypes across primate evolution. a** Dotplot of hpo phenotypes significantly enriched for genes under negative selection (PAML branch model, dN/dS < 1 & p < 0.05) in Homo-Pan.**b** Dotplot of hpo phenotypes significantly enriched for genes under negative selection (PAML branch model, dN/dS < 1 & p < 0.05) in Great Apes. **c** Dotplot of MPO phenotypes significantly enriched for genes under negative selection (PAML branch model, dN/dS < 1 & p < 0.05) in Haplorhini. **d** Dotplot of MPO phenotypes significantly enriched for genes under negative selection (PAML branch model, dN/dS > 1 & p < 0.05) in Primates. Enrichments were statistically quantified using hypergeometric testing and p-values were adjusted using the Benjamini-Hochberg procedure."
+#| column: body
+#| fig-height: 12
+#| fig-width: 25
+
+# remaining hpo enrichments 
+negSel_hpo_overlap_homopan <- ggplot(negSel_hpo_overlap_top10[negSel_hpo_overlap_top10$gene_set=="negSelGenes_branch_homo_pan",], 
+       aes(x=gene_ratio, y=reorder(phenotype, gene_ratio), colour=p.adjust, size=5)) + 
+  geom_point() + 
+  scale_y_discrete() + 
+  DOSE::theme_dose() + 
+  scale_colour_gradient(low = "#F2C695FF", high = "#E48C2AFF") +  # Use the colors you prefer
+  xlab("Gene ratio") + ylab("hpo phenotype") + 
+  scale_size(range=c(3,7)) + 
+  guides(size= "none") + 
+  theme(axis.text.x = element_text(angle=45, hjust=1, vjust=1, size=16), 
+        plot.title = element_text(hjust = 0.5),
+        text=element_text(size=14)) +
+  ggtitle("Negative selection in Homo-Pan") 
+
+
+negSel_hpo_overlap_greatape <- ggplot(negSel_hpo_overlap_top10[negSel_hpo_overlap_top10$gene_set=="negSelGenes_branch_great_ape",], 
+       aes(x=gene_ratio, y=reorder(phenotype, gene_ratio), colour=p.adjust, size=5)) + 
+  geom_point() + 
+  scale_y_discrete() + 
+  DOSE::theme_dose() + 
+  scale_colour_gradient(low = "#E7A79BFF", high = "#CD4F38FF") +  # Use the colors you prefer
+  xlab("Gene ratio") + ylab("hpo phenotype") + 
+  scale_size(range=c(3,7)) + 
+  guides(size= "none") + 
+  theme(axis.text.x = element_text(angle=45, hjust=1, vjust=1, size=16), 
+        plot.title = element_text(hjust = 0.5),
+        text=element_text(size=14)) +
+  ggtitle("Negative selection in Great Apes") 
+
+negSel_hpo_overlap_haplorhini <- ggplot(negSel_hpo_overlap_top10[negSel_hpo_overlap_top10$gene_set=="negSelGenes_branch_haplorhine",], 
+       aes(x=gene_ratio, y=reorder(phenotype, gene_ratio), colour=p.adjust, size=5)) + 
+  geom_point() + 
+  scale_y_discrete() + 
+  DOSE::theme_dose() + 
+  scale_colour_gradient(low = "#B3B8B1FF", high = "#657060FF") +  # Use the colors you prefer
+  xlab("Gene ratio") + ylab("hpo phenotype") + 
+  scale_size(range=c(3,7)) + 
+  guides(size= "none") + 
+  theme(axis.text.x = element_text(angle=45, hjust=1, vjust=1, size=16), 
+        plot.title = element_text(hjust = 0.5),
+        text=element_text(size=14)) +
+  ggtitle("Negative selection in Haplorhini") 
+
+negSel_hpo_overlap_primate <- ggplot(negSel_hpo_overlap_top10[negSel_hpo_overlap_top10$gene_set=="negSelGenes_branch_primate",], 
+       aes(x=gene_ratio, y=reorder(phenotype, gene_ratio), colour=p.adjust, size=5)) + 
+  geom_point() + 
+  scale_y_discrete() + 
+  DOSE::theme_dose() + 
+  scale_colour_gradient(low = "#9FA7BEFF", high = "#3D4F7DFF") +  # Use the colors you prefer
+  xlab("Gene ratio") + ylab("hpo phenotype") + 
+  scale_size(range=c(3,7)) + 
+  guides(size= "none") + 
+  theme(axis.text.x = element_text(angle=45, hjust=1, vjust=1, size=16), 
+        plot.title = element_text(hjust = 0.5),
+        text=element_text(size=14)) +
+  ggtitle("Negative selection in primates") 
+
+
+supp_figure4 <- negSel_hpo_overlap_homopan + negSel_hpo_overlap_greatape + negSel_hpo_overlap_haplorhini + negSel_hpo_overlap_primate 
+
+supp_figure4 <- supp_figure4 + plot_annotation(tag_levels = 'a') & theme(plot.tag = element_text(size = 16, face = "bold"))
+
+plot(supp_figure4)
+```
+
+```{r supplementary_figure_5}
+#| fig-cap: "**Supplementary Figure 5. Negatively selected genes are enriched in mammalian phenotypes. a** Dotplot of MPO phenotypes significantly enriched for genes under negative selection (PAML branch model, dN/dS < 1 & p < 0.05) in Homo-Pan.**b** Dotplot of hpo phenotypes significantly enriched for genes under negative selection (PAML branch model, dN/dS < 1 & p < 0.05) in Great Apes. **c** Dotplot of MPO phenotypes significantly enriched for genes under negative selection (PAML branch model, dN/dS < 1 & p < 0.05) in Haplorhini. **d** Dotplot of MPO phenotypes significantly enriched for genes under negative selection (PAML branch model, dN/dS > 1 & p < 0.05) in Primates. Enrichments were statistically quantified using hypergeometric testing and p-values were adjusted using the Benjamini-Hochberg procedure."
+
+#| column: body
+#| fig-height: 12
+#| fig-width: 25
+
+# remaining MPO enrichments 
+negSel_mpo_overlap_homopan <- ggplot(negSel_mpo_overlap_top10[negSel_mpo_overlap_top10$gene_set=="negSelGenes_branch_homo_pan",], 
+       aes(x=gene_ratio, y=reorder(phenotype, gene_ratio), colour=p.adjust, size=5)) + 
+  geom_point() + 
+  scale_y_discrete() + 
+  DOSE::theme_dose() + 
+  scale_colour_gradient(low = "#F2C695FF", high = "#E48C2AFF") +  # Use the colors you prefer
+  xlab("Gene ratio") + ylab("mpo phenotype") + 
+  scale_size(range=c(3,7)) + 
+  guides(size= "none") + 
+  theme(axis.text.x = element_text(angle=45, hjust=1, vjust=1, size=16), 
+        plot.title = element_text(hjust = 0.5),
+        text=element_text(size=14)) +
+  ggtitle("Negative selection in Homo-Pan") 
+
+
+negSel_mpo_overlap_greatape <- ggplot(negSel_mpo_overlap_top10[negSel_mpo_overlap_top10$gene_set=="negSelGenes_branch_great_ape",], 
+       aes(x=gene_ratio, y=reorder(phenotype, gene_ratio), colour=p.adjust, size=5)) + 
+  geom_point() + 
+  scale_y_discrete() + 
+  DOSE::theme_dose() + 
+  scale_colour_gradient(low = "#E7A79BFF", high = "#CD4F38FF") +  # Use the colors you prefer
+  xlab("Gene ratio") + ylab("mpo phenotype") + 
+  scale_size(range=c(3,7)) + 
+  guides(size= "none") + 
+  theme(axis.text.x = element_text(angle=45, hjust=1, vjust=1, size=16), 
+        plot.title = element_text(hjust = 0.5),
+        text=element_text(size=14)) +
+  ggtitle("Negative selection in Great Apes") 
+
+negSel_mpo_overlap_haplorhini <- ggplot(negSel_mpo_overlap_top10[negSel_mpo_overlap_top10$gene_set=="negSelGenes_branch_haplorhine",], 
+       aes(x=gene_ratio, y=reorder(phenotype, gene_ratio), colour=p.adjust, size=5)) + 
+  geom_point() + 
+  scale_y_discrete() + 
+  DOSE::theme_dose() + 
+  scale_colour_gradient(low = "#B3B8B1FF", high = "#657060FF") +  # Use the colors you prefer
+  xlab("Gene ratio") + ylab("mpo phenotype") + 
+  scale_size(range=c(3,7)) + 
+  guides(size= "none") + 
+  theme(axis.text.x = element_text(angle=45, hjust=1, vjust=1, size=16), 
+        plot.title = element_text(hjust = 0.5),
+        text=element_text(size=14)) +
+  ggtitle("Negative selection in Haplorhini") 
+
+negSel_mpo_overlap_primate <- ggplot(negSel_mpo_overlap_top10[negSel_mpo_overlap_top10$gene_set=="negSelGenes_branch_primate",], 
+       aes(x=gene_ratio, y=reorder(phenotype, gene_ratio), colour=p.adjust, size=5)) + 
+  geom_point() + 
+  scale_y_discrete() + 
+  DOSE::theme_dose() + 
+  scale_colour_gradient(low = "#9FA7BEFF", high = "#3D4F7DFF") +  # Use the colors you prefer
+  xlab("Gene ratio") + ylab("mpo phenotype") + 
+  scale_size(range=c(3,7)) + 
+  guides(size= "none") + 
+  theme(axis.text.x = element_text(angle=45, hjust=1, vjust=1, size=16), 
+        plot.title = element_text(hjust = 0.5),
+        text=element_text(size=14)) +
+  ggtitle("Negative selection in primates") 
+
+supp_figure5 <- negSel_mpo_overlap_homopan + negSel_mpo_overlap_greatape + negSel_mpo_overlap_haplorhini + negSel_mpo_overlap_primate 
+
+supp_figure5 <- supp_figure5 + plot_annotation(tag_levels = 'a') & theme(plot.tag = element_text(size = 16, face = "bold"))
+
+plot(supp_figure5)
+```
+
+```{r supplementary_figure_6}
+#| fig-cap: "**Supplementary Figure 6. Genes under negative selection in Primates are enriched for azoospermia risk variants.** MAGMA gene set analysis using genes under positive (PAML branch-site model, p < 0.05) or negative selection (PAML branch model, dN/dS < 1 & p < 0.05) and GWAS for: azoospermia, birth weight, death in infancy, early age related macular degeneration, IL-1B levels, Interleukin-18 levels, mean corpuscular hemaglobin concentration, prothrombin time, small for gestational age, spontaneous preterm birth. The grey dashed line is at p < 0.05, significant associations after Benjamini-Hochberg are marked by an asterisk. To annotate SNPs to genes, a 5kb upstream and 1.5kb downstream window was used."
+#| column: body
+#| fig-height: 20
+#| fig-width: 35
+
+
+# MAGMA 
+files <- list.files("/Volumes/cm1118/home/EvolutionOfCelltypes/magma/results", pattern="5kb.*gsa.out", full.names=T)
+
+# Create an empty list to store the data frames
+magma_res_list <- list()
+
+# Loop through each file and read it into a data frame
+for (file in files) {
+  data <- read.table(file, header=TRUE)  # Adjust the parameters based on your file format
+  magma_res_list[[file]] <- data
+}
+
+IL1B <- magma_res_list[["/Volumes/cm1118/home/EvolutionOfCelltypes/magma/results/ete3_posSel_negSel_magma_5kb_res_IL1b_mss_hg38.gsa.out"]]
+SML_GEST <- magma_res_list[["/Volumes/cm1118/home/EvolutionOfCelltypes/magma/results/ete3_posSel_negSel_magma_5kb_res_GCST90269905_small_gest_age_mss_hg38.gsa.out"]]
+PRECL <- magma_res_list[["/Volumes/cm1118/home/EvolutionOfCelltypes/magma/results/ete3_posSel_negSel_magma_5kb_res_GCST90269904_preeclampsia_mss_hg38.gsa.out"]]
+AZO <- magma_res_list[["/Volumes/cm1118/home/EvolutionOfCelltypes/magma/results/ete3_posSel_negSel_magma_5kb_res_GCST90239717_buildGRCh38_azoospermia_mss_hg38.gsa.out"]]
+INF_MORT <- magma_res_list[["/Volumes/cm1118/home/EvolutionOfCelltypes/magma/results/ete3_posSel_negSel_magma_5kb_res_GCST90095047_buildGRCh37_infant_mortality_mss_hg38.gsa.out"]]
+PREM <- magma_res_list[["/Volumes/cm1118/home/EvolutionOfCelltypes/magma/results/ete3_posSel_negSel_magma_5kb_res_GCST90080717_buildGRCh38_prem_birth_mss_hg38.gsa.out"]]
+BIRTHWT <- magma_res_list[["/Volumes/cm1118/home/EvolutionOfCelltypes/magma/results/ete3_posSel_negSel_magma_5kb_res_GCST90017142_buildGRCh37_birthweight_mss_hg38.gsa.out"]]
+PROTHR <- magma_res_list[["/Volumes/cm1118/home/EvolutionOfCelltypes/magma/results/ete3_posSel_negSel_magma_5kb_res_GCST90012724_buildGRCh37_prothrombin_mss_hg38.gsa.out"]]
+IL18 <- magma_res_list[["/Volumes/cm1118/home/EvolutionOfCelltypes/magma/results/ete3_posSel_negSel_magma_5kb_res_GCST90012024_buildGRCh37_il18_mss_hg38.gsa.out"]]
+HEM <- magma_res_list[["/Volumes/cm1118/home/EvolutionOfCelltypes/magma/results/ete3_posSel_negSel_magma_5kb_res_GCST90002328_buildGRCh37_hemaglobin_mss_hg38.gsa.out"]]
+AMD <- magma_res_list[["/Volumes/cm1118/home/EvolutionOfCelltypes/magma/results/ete3_posSel_negSel_magma_5kb_res_GCST010723_buildGRCh37_amd_mss_hg38.gsa.out"]]
+
+AMD$p_adjusted <- p.adjust(AMD$P, method = "BH") 
+HEM$p_adjusted <- p.adjust(HEM$P, method = "BH") 
+IL18$p_adjusted <- p.adjust(IL18$P, method = "BH") 
+PROTHR$p_adjusted <- p.adjust(PROTHR$P, method = "BH") 
+BIRTHWT$p_adjusted <- p.adjust(BIRTHWT$P, method = "BH") 
+PREM$p_adjusted <- p.adjust(PREM$P, method = "BH") 
+INF_MORT$p_adjusted <- p.adjust(INF_MORT$P, method = "BH") 
+AZO$p_adjusted <- p.adjust(AZO$P, method = "BH") 
+PRECL$p_adjusted <- p.adjust(PRECL$P, method = "BH") 
+SML_GEST$p_adjusted <- p.adjust(SML_GEST$P, method = "BH") 
+IL1B$p_adjusted <- p.adjust(IL1B$P, method = "BH")
+
+AMD$group <- "Early age-related macular degeneration" 
+HEM$group <- "Mean corpuscular hemoglobin concentration" 
+IL18$group <- "Interleukin-18 levels" 
+PROTHR$group <- "Prothrombin time" 
+BIRTHWT$group <- "Birth weight" 
+PREM$group <- "Spontaneous preterm birth" 
+INF_MORT$group <- "Death in infancy" 
+AZO$group <- "Azoospermia" 
+PRECL$group <- "Preeclampsia" 
+SML_GEST$group <- "Small for gestational age" 
+IL1B$group <- "IL-1B levels"
+
+magma_res <- rbind(AMD, HEM, IL18, PROTHR, BIRTHWT, PREM, INF_MORT, AZO, SML_GEST, IL1B)
+
+magma_res <- magma_res %>% separate(FULL_NAME, into = c("selection", "branch"), sep = "in", extra = "merge")
+
+magma_res$selection <- gsub("_", " ", magma_res$selection) 
+magma_res$branch <- gsub("_", " ", magma_res$branch) 
+magma_res$branch <- gsub("Haplorhine", "Haplorhini", magma_res$branch)
+
+magma_res$branch <- factor(magma_res$branch, levels=c(" Humans"," Homo-Pan"," Great Apes", " Haplorhini"," Primates"))
+
+ast_q <- rep("", dim(magma_res)[1]) 
+ast_q[magma_res$p_adjusted < 0.05] <- "*" 
+magma_res$ast_q <- ast_q
+
+magma_plot <- ggplot(magma_res, aes(x = factor(branch, levels = rev(levels(branch))), y = -log10(P), fill = branch)) + geom_bar(stat = "identity") + scale_fill_ghibli_d("MononokeLight", direction = -1) + geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "slategrey") + facet_grid(selection ~ group) + geom_text(aes_string(label = "ast_q"), size = 9, hjust = -0.05) + coord_flip() + scale_x_discrete(limits = rev(levels(magma_res$branch))) + theme_bw() + theme(plot.title = element_text(hjust=0.5), text = element_text(size=20), legend.position = "none") + labs(x = "", y ="-log10(FDR)", title ="MAGMA gene set analysis using GWAS")
+
+supp_figure6 <- magma_plot + plot_annotation(tag_levels = 'a') & theme(plot.tag = element_text(size = 16, face = "bold"))
+
+plot(supp_figure6)
+
+```
+
+# 
